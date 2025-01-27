@@ -1,0 +1,471 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(55deg, #fff 50%, #550000 50%);
+    overflow: hidden;
+}
+
+.container {
+    display: flex;
+    margin: 0 !important;
+/*    animation-name: sign-in;
+    animation-duration: 1s;*/
+    
+}
+
+/*@keyframes sign-in{
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}*/
+
+
+
+.left {
+    width: 50%;
+    margin-top: 15px;
+    padding: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 1;
+}
+
+.right {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin-right: -20%;
+    flex-direction: column;
+    margin-top: 10px;
+    padding-top: 40px;  
+}
+
+.left h1 {
+    font-size: 42px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    position: relative;
+}
+
+/* Underline styling */
+.underline {
+    width: 50px; /* Adjust width as needed */
+    height: 4px;
+    background-color: black;
+    margin-bottom: 20px;
+}
+
+/* Adjusted position for "Create an Admin User" text */
+.createmsg {
+    margin: 10px;
+}
+
+.createmsg h2 {
+    color: #550000;
+    font-size: 20px;
+}
+
+.card {
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+
+
+/*======FORMMMMMM=====*/
+/* Input field with icon styling 
+.form-group {
+    position: relative;
+}*/
+
+/*
+.form-group input {
+    padding-right: 40px; /* To make space for the icon 
+    height: 50px;
+    border: 2px solid #eee;
+    border-radius: 5px;
+    width: 30vw;
+}*/
+
+/*
+.form-group input:focus {
+    outline: none;
+    border-color: #550000;
+    box-shadow: none;
+}
+
+/* Icon styling 
+.icon {
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+    font-size: 18px;
+    color: black;
+}
+
+
+.form-group {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}*/
+
+.form-group {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    margin-top: 20px;
+    flex-direction: column;
+}
+
+.form-group input {
+    width: 30vw;
+    padding: 12px 40px 12px 12px; /* Extra padding for icon space */
+    border: 1.5px solid #cccccc;
+    border-radius: 5px;
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus {
+    border: 1.5px solid #550000;
+}
+
+.form-group label {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-10%);
+    background-color: #fff; /* Match background color */
+    padding: 0 5px;
+    font-size: 16px;
+    color: #999;
+    pointer-events: none;
+    transition: 0.3s ease;
+}
+
+/* Floating label effect */
+.form-group input:focus + label,
+.form-group input:not(:placeholder-shown) + label {
+    top: -8px;
+    font-size: 15px;
+    color: #000;
+}
+
+/* Icon styling */
+.icon {
+    position: absolute;
+    right: 12px;
+    font-size: 16px;
+    color: black;
+    top: 15px;
+}
+
+/* Sign up button */
+.signup_button {
+    display:flex;
+    justify-content: center;
+    margin: 5px 10px;
+    padding: 10px;
+    font-size: 20px;
+}
+
+.signup_button .s-btn {
+    padding: 5px 50px;
+    border-radius: 100px;
+    background-color: #550000;
+    border: solid 1px #550000;
+    color: white;
+}
+
+.signup_button .s-btn:hover {
+    transition: ease-in 0.1s;
+    color: #550000;
+    background-color: white;
+    border: solid 1px #550000;
+} 
+
+/* Login button */
+.login_button {
+    margin: 15px;
+    padding: 10px;
+}
+
+.login_button a {
+    margin: 10px;
+    text-decoration: none;
+}
+
+.login_button a:hover {
+    transition: ease-in-out 0.1s;
+    color: #550000;
+}
+
+
+
+
+/*right container*/
+
+.right  h1{
+    font-size: 23px;
+    color: white;
+    letter-spacing: 2px;
+    word-spacing: 5px;
+    font-weight: 80;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.school_logos{
+    display: flex;
+    gap: 20px;
+    margin: 20px;
+}
+
+.school_logo img{
+    width: 110px;
+    height: 110px;
+    padding: 5px;
+}
+.ssc_logo img{
+    width: 110px;
+    height: 110px;
+    padding: 5px;
+}
+
+/*responsive*/
+
+@media (max-width: 767px) {
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: linear-gradient(360deg, #fff 50%, transparent 50%);
+        overflow: hidden;
+        position: relative; /* Make body a positioned element */
+    }
+    
+    body::after {
+        content: '';
+        position: absolute;
+        top: 0; /* Start overlay at the midpoint */
+        left: 0;
+        width: 100%;
+        height: 25%;
+        background-color: #550000;
+        border-bottom-left-radius: 50px;
+        border-bottom-right-radius: 50px;
+        z-index: -1; /* Ensure it stays behind the content */
+    }
+    
+
+      .container {
+        display: flex;
+        margin: 0 !important;
+        animation-name: sign-in;
+        animation-duration: 1s;
+        position: relative;
+        flex-direction: column-reverse;
+        
+    }
+    
+    @keyframes sign-in{
+        from {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    
+    
+    .left {
+        width: 100%;
+        margin-top: 10px;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        z-index: 1;
+    }
+    
+    .right {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        margin-right: -20%;
+        flex-direction: column;
+        margin-top: 10px;
+        padding-top: 10px;  
+    }
+    
+    .left h1 {
+        font-size: 30px;
+        font-weight: bold;
+        margin-bottom: 10px;
+        position: relative;
+    }
+    
+    /* Underline styling */
+    .underline {
+        width: 50px;
+        height: 4px;
+        background-color: black;
+        margin-bottom: 15px;
+    }
+    
+    /* Adjusted position for "Create an Admin User" text */
+    .createmsg {
+        margin: 10px;
+    }
+    
+    .createmsg h2 {
+        color: #550000;
+        font-size: 16px;
+    }
+    
+    .card {
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    
+    .form-group {
+        position: relative;
+        display: flex;
+        align-items: center;
+        margin-top: 20px;
+    }
+    
+    .form-group input {
+        width: 90vw;
+        padding: 10px 40px 10px 10px;
+        border: 1.5px solid #cccccc;
+        border-radius: 5px;
+        font-size: 16px;
+        outline: none;
+        transition: border-color 0.3s ease;
+    }
+    
+    .form-group input:focus {
+        border: 1.5px solid #550000;
+    }
+    
+    .form-group label {
+        position: absolute;
+        left: 12px;
+        top: 50%;
+        transform: translateY(-10%);
+        background-color: #fff; /* Match background color */
+        padding: 0 5px;
+        font-size: 16px;
+        color: #999;
+        pointer-events: none;
+        transition: 0.3s ease;
+    }
+    
+    /* Floating label effect */
+    .form-group input:focus + label,
+    .form-group input:not(:placeholder-shown) + label {
+        top: -8px;
+        font-size: 15px;
+        color: #000;
+    }
+    
+    /* Icon styling */
+    .icon {
+        position: absolute;
+        right: 12px;
+        font-size: 16px;
+        color: black;
+    }
+    
+    /* Sign up button */
+    .signup_button {
+        margin: 5px 10px;
+        padding: 5px;
+        font-size: 15px;
+    }
+    
+    .signup_button .s-btn {
+        padding: 5px 50px;
+        border-radius: 100px;
+        background-color: #550000;
+        border: solid 1px #550000;
+        color: white;
+    }
+    
+    .signup_button .s-btn:hover {
+        transition: ease-in 0.1s;
+        color: #550000;
+        background-color: white;
+        border: solid 1px #550000;
+    } 
+    
+    /* Login button */
+    .login_button {
+        font-size: 12px;
+        margin: 15px;
+        padding: 10px;
+    }
+    
+    .login_button a {
+        margin: 10px;
+        text-decoration: none;
+    }
+    
+    .login_button a:hover {
+        transition: ease-in-out 0.1s;
+        color: #550000;
+    }
+    
+    
+    
+    
+    /*right container*/
+    
+    .right  h1{
+        font-size: 12px;
+        color: white;
+        letter-spacing: 2px;
+        word-spacing: 5px;
+        font-weight: 80;
+        margin-left: 10px;
+        margin-bottom: 5px !important;
+    }
+    
+    .school_logos{
+        display: flex;
+        gap: 10px;
+        margin: 20px;
+    }
+    
+    .school_logo img{
+        width: 70px;
+        height: 70px;
+        padding: 5px;
+    }
+    .ssc_logo img{
+        width: 70px;
+        height: 70px;
+        padding: 5px;
+    }
+}
