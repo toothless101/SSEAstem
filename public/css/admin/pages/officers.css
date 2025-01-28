@@ -1,0 +1,327 @@
+.btn-new-officer{
+    background-color: #550000;
+    border: transparent;
+    color: white;
+}
+.btn-new-officer:hover{
+    background-color: #800505;
+    color:white;
+}
+
+.fa-circle-arrow-left{
+    font-size: 20px;
+}
+
+
+.search-container {
+    position: relative; 
+    display: inline-block; 
+    width: 380px; 
+}
+
+.search-input {
+    width: 100%; 
+    padding: 5px 40px 5px 15px; 
+    border-top: 1px solid transparent;
+    border-right: 1px solid transparent;
+    border-left: 1px solid transparent;
+    border-radius: 10px;
+    outline: none;
+    font-size: 16px;
+    background-color: #B3B3B380; 
+}
+
+.search-input::placeholder {
+    color: #888; 
+}
+
+.search-btn {
+    position: absolute; 
+    right: 10px; 
+    top: 50%; 
+    transform: translateY(-50%); 
+    background: none; 
+    border: none;
+    color: #555; 
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.search-btn:hover {
+    color: #333; /* Darker color on hover */
+}
+
+/* OFFICER LIST TABLE*/
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 50px 0;
+}
+
+th, td {
+    padding: 10px;
+    text-align: center;
+    
+}
+
+th {
+    color: #550000;
+    font-weight:lighter;
+}
+
+tr, th{
+    font-size: 13px;
+}
+td{
+    text-align: start;
+}
+
+td:first-child{
+    text-align: center !important;
+}
+
+td:nth-child(6){
+    justify-content: center !important;
+    align-items: center ;    
+}
+td{
+    color: #550000;
+    font-weight: 400;
+}
+
+tr.no-data {
+    background-color: #ffe4c4; /* Light orange background */
+    text-align: center;
+    color: #884444; /* Dark brown text */
+}
+
+.no-data td {
+    font-weight: bold;
+}
+
+/*ADD OFFICER MODAL*/
+
+.modal{
+    --bs-modal-width: 900px !important;
+}
+.modal-content {
+    border: 2px solid #550000;
+}
+.modal-header {
+    border-bottom: none;
+    color: #550000;
+}
+
+.modal-header .btn-close {
+    background-color: transparent;
+    border: none;
+    font-size: 13px;
+}
+.modal-backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.form-label {
+    position: relative;
+    transform: translateY(16px);
+    left: 12px;
+    background-color: white;
+    transition: 0.3s ease;
+    font-size: 12px;
+}
+
+
+
+/*UPLOAD IMAGE*/
+.custom-file-label {
+    position: absolute !important ;
+    top: 192px;
+    right: 32rem;
+    left: 57px !important;
+    z-index: 1;
+    height: calc(2.25rem + 2px);
+    padding: 0.375rem 0.75rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    box-shadow: none;
+}
+
+.col-md-6{
+    margin-top: 2px;
+}
+.custom-file-input {
+    position: relative;
+    z-index: 2;
+    width: 50%;
+    height: calc(2.25rem + 2px);
+    margin: 0;
+    opacity: 0;
+}
+
+
+.custom-file-label::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 3;
+    display: block;
+    height: 2.25rem;
+    padding: 0.375rem 0.75rem;
+    line-height: 1.5;
+    color: #495057;
+    content: "Browse";
+    background-color: #e9ecef;
+    border-left: inherit;
+    border-radius: 0 0.25rem 0.25rem 0;
+}
+
+.control-label .mt-3{
+    left: 40px !important;
+}
+ /* Image Holder Styling */
+ .image-holder {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%; /* Circular Shape */
+    overflow: hidden;
+    border: 2px solid #ddd;
+    background-color: #f8f9fa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+
+  .image-holder img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Keeps image aspect ratio */
+  }
+
+
+
+
+.btn-cancel {
+    border: 1px solid #550000; /* Dark red border */
+    color: #800000; /* Dark red text */
+}
+
+.btn-submit {
+    background-color: #550000;
+    color: white;
+}
+
+.btn-submit:hover{
+    background-color: #800505;
+    color:white;
+}
+
+input.form-control {
+    border-radius: 5px;
+}
+
+
+.form-group label{
+    position: relative;
+    transform: translateY(-59px);
+    left: 12px;
+    background-color: white;
+    transition: 0.3s ease;
+    font-size: 12px;
+}
+
+.mb-3{
+    margin-bottom: 0rem !important;
+}
+
+/*SUCCESS MODAL*/
+.text-success{
+    color: #550000 !important;
+}
+.success-icon {
+    width: 50px;
+    height: 50px;
+    color: #550000; /* Dark red background */
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.success-icon i {
+    font-size: 50px;
+}
+
+/*OFFICER'S PROFILE*/
+.officer_profile_title label{
+    font-size: 30px;
+    color: #550000;
+    font-weight: 600;
+    margin-left: 15px;
+}
+
+.officer-detail-container {
+    margin: 0px 15px;
+}
+.officer-detail-container .officer-detail{
+    display: flex;
+    color: #550000;
+    justify-content: space-between;
+    font-size: 12px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+}
+table thead tr th{
+    color: #550000;
+    font-size: 13px;
+    font-weight: lighter;
+}
+
+tbody td {
+    color: #550000;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+/* Add vertical borders to colspan and sub-columns */
+.colspan-header,.sub-column, .sub-column1 {
+    border-left: 1px solid #B3B3B3; /* Left border for sub-columns */
+    border-right: 1px solid #B3B3B3; /* Right border for sub-columns */
+}
+
+tbody tr:nth-child(odd){
+    background-color:rgba(255, 173, 96, .50) !important;
+
+}
+
+tbody tr:nth-child(even){
+    background-color: #FFEEAD !important;
+}
+
+
+.officer-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+  .officer-item img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 1rem;
+  }
+  .officer-info {
+    display: flex;
+    align-items: center;
+  }

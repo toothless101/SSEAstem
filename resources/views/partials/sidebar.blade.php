@@ -7,7 +7,7 @@
     <ul class="nav-links">
         <!-- Dashboard -->
         <li>
-            <a href="{{url('/')}}" class="{{request()->routeIs('admin_dashboard') ? 'active' : ''}}">
+            <a href="{{route('admin_dashboard')}}" class="{{request()->routeIs('admin_dashboard') ? 'active' : ''}}">
                 <i class="fa-solid fa-gauge-high"></i>
                 <span class="link_name">Dashboard</span>
             </a>
@@ -25,7 +25,7 @@
 
         <!--Officers-->
         <li>
-            <a href="" class="">
+            <a href="{{route('manage_officer')}}" class="{{request()->routeIs('manage_officer') ? 'active' : ''}}">
                 <i class="fa-solid fa-user"></i>
                 <span class="link_name">Officers</span>
             </a>
@@ -33,27 +33,6 @@
                 <li><a class="link_name" href="">Officers</a></li>
             </ul>
         </li>
-
-        <!-- Officer  DROPDOWN
-        <li>
-            <div class="iocn-link">
-                <a href="">
-                    <i class="fa-solid fa-user"></i>
-                <span class="link_name">Officers</span>
-                </a>
-                <!--<i class="bx bxs-chevron-down arrow"></i>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="">Officers</a></li>
-                </ul>
-            </div>
-
-           <!-- <ul class="sub-menu">
-                <li><a class="link_name" href="">Events</a></li>
-            <li><a href="examination_dates.html">Add Event</a></li>
-                <li><a href="deans_lister.html">Upcoming Events</a></li>
-                <li><a href="events.html">List Events</a></li>
-            </ul> 
-        </li>-->
 
         <!-- Events -->
         <li>
@@ -106,7 +85,7 @@
         </li>
         <!-- Logout -->
         <li>
-            <a href="#" style=margin-top:100px>
+            <a href="{{route('admin_logout')}}" style=margin-top:100px>
                 <i class="fa-solid fa-right-from-bracket"></i>
                 <span class="link_name logout">Log Out</span>
             </a>
