@@ -79,6 +79,11 @@
                                     <i class="bi bi-eye-fill" style="color: #550000; margin-left: 5px;"></i>
                                 </a>
                            </button>
+                           <button style="background-color: transparent; border: none;">
+                            <a href="" class="">
+                                <i class="bi bi-trash-fill" style="color: #550000; margin-left: 5px;"></i>
+                            </a>
+                       </button>
                         </td>    
 
                         <td>Assigned </td>
