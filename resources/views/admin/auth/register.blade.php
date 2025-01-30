@@ -74,7 +74,7 @@
         <!-- Login Prompt -->
         <div class="login_button">
             Already have an account? 
-            <a href="">Login</a>
+            <a href="{{route('admin_login')}}">Login</a>
         </div>
     </div>
 

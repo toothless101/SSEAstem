@@ -75,7 +75,7 @@
                                 </a>
                            </button>
                            <button style="background-color: transparent; border: none;">
-                                <a href="{{route('officer_show', $user->id)}}" class="">
+                                <a href="" class="">
                                     <i class="bi bi-eye-fill" style="color: #550000; margin-left: 5px;"></i>
                                 </a>
                            </button>
@@ -96,7 +96,7 @@
     </section>
     
 @include('admin.pages.officer.officer-modals.add-officer-modal') 
-{{-- @include('admin.pages.officer.officer-modals.edit-officers')  --}}
+@include('admin.pages.officer.officer-modals.edit-officers') 
 
     
 

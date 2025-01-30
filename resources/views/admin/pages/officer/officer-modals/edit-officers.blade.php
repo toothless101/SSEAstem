@@ -10,7 +10,7 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form  action="{{route('officer_update', ['user' =>$user->id])}}" method="POST" enctype="multipart/form-data">    <!--route('officer_update', ['user' =>$user->id])-->
+          <form  action="{{route('update_officer', ['user' =>$user->id])}}" method="POST" enctype="multipart/form-data">    <!--route('officer_update', ['user' =>$user->id])-->
             @csrf
             @method('PUT') 
 

@@ -67,10 +67,10 @@
                  @enderror
             </div>
 
-            <!-- Forgot Password Link -->
+            {{-- <!-- Forgot Password Link -->
             <div class="forgot_password" id="forgot_pas">
                 <a href="">Forgot Password?</a>
-            </div>
+            </div> --}}
 
              <!-- Login Button -->
             <div class="log_btn">
