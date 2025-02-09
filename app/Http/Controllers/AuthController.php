@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 
 class AuthController extends Controller
 {
@@ -21,8 +22,8 @@ class AuthController extends Controller
     public function registerAdmin(Request $request){
         $request->validate ([
             'fullname' => 'required',
-            'username' => 'required',
-            'email' => 'required|email',
+            'username' => 'required|unique:users,username',
+            'email' => 'required|unique:users,email|email',
             'password' => 'required|min:6'
         ]);
 
@@ -33,6 +34,7 @@ class AuthController extends Controller
         $admin->username = $request->username;
         $admin->password = bcrypt($request->password);
         $admin->usertype = '1'; // 1 for admin, 2 for student officer
+        // $admin->user_img = asset('/img/admin.png'); //default image for admin after registration
     
 
     if($admin->save()){
@@ -52,12 +54,7 @@ class AuthController extends Controller
 
         //attempt to log the user with the provided credentials
         $admin_login = $request->only('username', 'password');
-           
-        // if(Auth::attempt($admin_login)){
-        //         return redirect()->intended(route('admin_dashboard'));
-        //     }
-        //     return redirect(route('admin_login'))->with('error', 'Invalid username or password!');
-        
+
         
         if(Auth::attempt($admin_login)){
             
@@ -86,7 +83,7 @@ class AuthController extends Controller
 
     //officer
     public function officer(){
-         $users = User::latest()->get();
+         $users = User::where('usertype', 2)->latest()->get();
         return view('admin/pages/officer.officer', compact('users'));
     }
 
@@ -95,17 +92,18 @@ class AuthController extends Controller
         
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|email',
-            'username' => 'required|string|max:255',
+            'email' => 'required|unique:users,email|email',
+            'username' => 'required|string|unique:users,username|max:255',
             'password' => 'required|min:6',
             'usertype' => 'required|integer|in:1,2',
             'user_img'=>'nullable|image|max:2048'
 
         ]);
 
+        $filename = 'default.png'; //default image if there is no image upldoaded
         if($request->hasFile('user_img')){
             $filename = time().'.'.$request->user_img->extension();
-            $request->user_img->move(public_path('images'), $filename);
+            $request->user_img->move(public_path('images/'), $filename);
         }
 
         try {
@@ -118,51 +116,72 @@ class AuthController extends Controller
                 'user_img' => $filename
             ]);
 
-            return redirect()->back()->with('success', 'Officer created successfully!');
+            return redirect()->back()->with('success_add', 'Officer created successfully!');
         }catch(\Exception $e){
-            return redirect()->back()->with('error', 'Something went wrong, please try again!' . $e->getMessage());
+            return redirect()->route('manage_officer')->with('error', 'Something went wrong, please try again!' . $e->getMessage());
         }
 
     }
 
     public function showOfficer(Request $request, $user)
     {
-        $user = User::find($user);
+        $user = User::findOrFail($user);
         return view('admin.posts.officer-modals.officer_profile', compact('user'));
     }
 
-    public function updateOfficer(Request $request, $user)
-    {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email',
-            'username' => 'required|string|max:255',
-            // 'password' => 'required|min:6',
-            'usertype' => 'required|integer|in:1,2',
-            'user_img'=>'nullable|image|max:2048'
-        ]);
 
-        $filename = '';
-        if($request->hasFile('user_img')){
-            $filename = time().'.'.$request->user_img->extension();
-            $request->user_img->move(public_path('images'), $filename);
-        }
+    public function editOfficer(Request $request, $user){
+        //dd($user);
+        $user = User::find($user);
+        return view('admin.pages.officer.officer-modals.edit-officers', compact('user'));// ['user' => $user]);
+    }
+
+    public function updateOfficer(Request $request, $user){
 
         $user = User::find($user);
 
         $user->name = $request->name;
         $user->email = $request->email;
         $user->username = $request->username;
-        // $user->password = bcrypt($request->password);
         $user->usertype = $request->usertype;
         // $user->user_img = $filename;
 
-        if(!empty($filename)){
+        if($request->hasFile('user_img')){
+            
+            $destination = 'images/'.$user->user_img;
+            if(File::exists($destination)){                          //deletes the file or image
+                File::delete($destination);
+            }
+          
+            $file= $request->file('user_img');                        //upload new image
+            $extension = $file->getClientOriginalExtension();
+            $filename = time().'.'.$extension;
+            $file->move('images/', $filename);
             $user->user_img = $filename;
         }
 
-        $user->save();
+        $user->update();
 
-        return redirect()->route('manage_officer')->with('success_update', 'Officer updated successfully!');
+        return redirect()->route('manage_officer')->with('success_update', 'Officer Updated Successully!');
+    }
+
+    public function deleteOfficer(Request $request, $user)
+    {
+        $user = User::find($user);
+
+        if($user->user_img){
+            $img_path = public_path('images/' . $user->user_img);
+            if(file_exists($img_path)){
+                unlink($img_path);    //delete the image of the deleleted user 
+           }
+        }
+        $user->delete();
+        return redirect()->route('manage_officer')->with('success', 'Officer Deleted Successfully!');
+    }
+
+
+    //ADMIN PAGE
+    public function adminPage(){
+        return view('admin.pages.officer.admin');
     }
 }

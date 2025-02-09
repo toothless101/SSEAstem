@@ -8,80 +8,57 @@
                 <h5 class="modal-title" id="addOfficerModalLabel">Add New Officer</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
-              <form method="POST" action="{{route('create_officer')}}" enctype="multipart/form-data">
+          
+          <div class="modal-body">
+            <form method="POST" action="{{route('create_officer')}}" enctype="multipart/form-data">
                 @csrf
-
-                {{-- @if (session('success'))
-                    <div class="alert alert-success">
-                        {{ session('success') }}
-                    </div>
-                @endif
-
-                @if (session('error'))
-                    <div class="alert alert-danger">
-                        {{ session('error') }}
-                    </div>
-                @endif --}}
-
-
-                <div class="row">
-                    <!-- Left Side: Image Upload and Preview -->
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <!-- Image Preview Section -->
-                            <div class="d-flex justify-content-center">
-                                <div class="image-holder">
-                                    <img id="output" src="{{ asset('img/no-image-available.png') }}" alt="Placeholder Image">
-                                </div>
-                            </div>
-                            <!-- File Input -->
-                            <div class="custom-file">
-                                <input type="file" class="form-control" id="user_img" name="user_img" accept="image/*" onchange="loadFile(event)">
-                            </div>
-
-                            @error('user_img')
-                                <span class="text-danger">{{ $message }}</span>     
-                            @enderror
-                        </div>
-                    </div>
-            
-                    <!-- Right Side: Fields -->
-                    <div class="col-md-6 mt-10">
-                        <div class="row g-3">
-                            <!-- Row 1 Full Name -->
-                            <div class="col-md-12">
-                                <label for="fullname" class="form-label">Full Name</label>
-                                <input type="text" class="form-control" id="name" name="name" value="{{old ('name')}}">
-                                @error('name')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
-                            </div>
-            
-                            <!-- Row 2 Position -->
-                            <div class="col-md-12">
-                                <label for="position" class="form-label">Position</label>
-                                <select class="form-select" name="usertype" id="usertype">
-                                    <option selected>--</option>
-                                    <option value="1" {{old('usertype') == 1 ? 'selected' : ''}}>Admin</option>
-                                    <option value="2" {{old('usertype') == 2 ? 'selected' : ''}}>Student Officer</option>
-                                </select>
-                                @error('usertype')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
-                            </div>
-                        </div>
+        
+                <!-- Centered Image Preview -->
+                <div class="d-flex justify-content-center mb-3">
+                    <div class="image-holder text-center">
+                        <img id="output" src="{{ asset('img/no-image-available.png') }}" alt="Placeholder Image">
                     </div>
                 </div>
-            
-                <!-- Text Fields -->
-                <div class="row mt-2 g-3 mb-2">
+        
+                <!-- Full Name and File Upload -->
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="user_img" class="form-label">Profile Image</label>
+                        <input type="file" class="form-control" id="user_img" name="user_img" accept="image/*" onchange="loadFile(event)">
+                        @error('user_img')
+                            <span class="text-danger">{{ $message }}</span>     
+                        @enderror
+                    </div>
 
+                    <div class="col-md-6">
+                        <label for="fullname" class="form-label">Full Name</label>
+                        <input type="text" class="form-control" id="name" name="name" value="{{old ('name')}}">
+                        @error('name')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    
+                </div>
+        
+                <!--  Input Fields -->
+                <div class="row g-3">
                     <div class="col-md-6">
                         <label for="email" class="form-label">Email</label>
                         <input type="text" class="form-control" id="email" name="email" value="{{old ('email')}}">
                         @error('email')
                             <span class="text-danger">{{ $message }}</span> 
+                        @enderror
+                    </div>
+        
+                    <div class="col-md-6">
+                        <label for="position" class="form-label">Position</label>
+                        <select class="form-select" name="usertype" id="usertype">
+                            <option selected>--</option>
+                            <option value="1" {{old('usertype') == 1 ? 'selected' : ''}}>Admin</option>
+                            <option value="2" {{old('usertype') == 2 ? 'selected' : ''}}>Student Officer</option>
+                        </select>
+                        @error('usertype')
+                            <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </div>
                     <div class="col-md-6">
@@ -91,7 +68,7 @@
                             <span class="text-danger">{{ $message }}</span> 
                         @enderror
                     </div>
-            
+        
                     <div class="col-md-6 mb-2">
                         <label for="password" class="form-label">Password</label>
                         <input type="password" class="form-control" id="password" name="password" value="{{old ('password')}}">
@@ -100,20 +77,22 @@
                         @enderror
                     </div>
                 </div>
-            
+        
                 <div class="modal-footer">
                     <button type="button" class="btn btn-cancel" data-bs-dismiss="modal">Cancel</button>
                     <button type="submit" class="btn btn-submit">Add</button>
                 </div>
             </form>
-            
-          </div>
+        </div>
+        
+        
       </div>
     
   </div>
 </div>   
 
-<div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+{{-- Successmodal --}}
+<div class="modal fade" id="successAddModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content text-center p-4">
           <div class="modal-body">
@@ -130,7 +109,8 @@
   </div>
 </div>
 
-<div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
+{{-- Error Modal --}}
+<div class="modal fade" id="errorAddModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content text-center p-4">
             <div class="modal-body">
@@ -155,22 +135,21 @@
       URL.revokeObjectURL(output.src); // Free up memory
     }
   }
-</script>
 
-@if(session('success'))
-    <script>
+    @if(session('success_add'))
         document.addEventListener('DOMContentLoaded', function () {
-            const successModal = new bootstrap.Modal(document.getElementById('successModal'));
+            const successModal = new bootstrap.Modal(document.getElementById('successAddModal'));
             successModal.show();
         });
-    </script>
-@endif
+    @endif
 
-@if (session('error'))
-    <script>
+    @if (session('error_add'))
+
         document.addEventListener('DOMContentLoaded', function () {
-            const errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
+            const errorModal = new bootstrap.Modal(document.getElementById('errorAddModal'));
             errorModal.show();
         });
-    </script>
-@endif
+    @endif
+
+  
+</script>

@@ -6,14 +6,16 @@
 
 body {
     margin: 0;
-    font-family: Arial, sans-serif;
+    font-family: 'Poppins', sans-serif;
     background: linear-gradient(55deg, #fff 50%, #550000 50%);
     overflow: hidden;
+    background-repeat: no-repeat;
 }
 
 .container {
     display: flex;
     margin: 0 !important;
+    height: 100vh;
 /*    animation-name: sign-in;
     animation-duration: 1s;*/
     
@@ -35,11 +37,10 @@ body {
 .left {
     width: 50%;
     margin-top: 15px;
-    padding: 80px;
+    padding: 70px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    z-index: 1;
 }
 
 .right {
@@ -135,7 +136,7 @@ body {
 
 .form-group input {
     width: 30vw;
-    padding: 12px 40px 12px 12px; /* Extra padding for icon space */
+    padding: 7px 40px 9px 7px; /* Extra padding for icon space */
     border: 1.5px solid #cccccc;
     border-radius: 5px;
     font-size: 16px;

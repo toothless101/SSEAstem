@@ -1,0 +1,298 @@
+.btn-new-event{
+    background-color: #550000 !important;
+    border: transparent !important;
+    color: white !important;
+}
+.btn-new-event:hover{
+    background-color: #800505 !important;
+    color:white !important;
+}
+
+.search-container {
+    position: relative; 
+    display: inline-block; 
+    width: 380px; 
+}
+
+.search-input {
+    width: 100%; 
+    padding: 5px 40px 5px 15px; 
+    border-top: 1px solid transparent;
+    border-right: 1px solid transparent;
+    border-left: 1px solid transparent;
+    border-radius: 10px;
+    outline: none;
+    font-size: 16px;
+    background-color: #B3B3B380; 
+}
+
+.search-input::placeholder {
+    color: #888; 
+}
+
+.search-btn {
+    position: absolute; 
+    right: 10px; 
+    top: 50%; 
+    transform: translateY(-50%); 
+    background: none; 
+    border: none;
+    color: #555; 
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.search-btn:hover {
+    color: #333; /* Darker color on hover */
+}
+
+
+/*table*/
+.table-responsive {
+    overflow-x: auto; /* Enable horizontal scrolling */
+    width: 100%;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+table thead tr th{
+    color: #550000;
+    font-size: 13px;
+    font-weight: lighter;
+}
+
+tbody td {
+    color: #550000;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+tbody tr:nth-child(odd){
+    background-color:rgba(255, 173, 96, .50) !important;
+
+}
+
+tbody tr:nth-child(even){
+    background-color: #FFEEAD !important;
+}
+
+tbody tr td{
+    text-align: start !important;
+}
+
+/*add event modal*/
+.modal{
+    --bs-modal-width: 900px !important;
+}
+
+.modal-content {
+    border: 2px solid #550000 !important;
+}
+.modal-header {
+    border-bottom: none;
+    color: #550000;
+}
+.sched_type{
+    color:#550000;
+}
+
+.modal-backdrop {
+    background-color: rgba(0, 0, 0, 0.2) !important;
+}
+
+/*.form-group label{
+    position: relative;
+    transform: translateY(17px);
+    left: 12px;
+    background-color: white;
+    transition: 0.3s ease;
+    font-size: 12px;
+}*/
+.time-sched{
+    padding: 0px;
+}
+.form-group:nth-child(3){
+    margin-top: -20px !important;
+}
+.form-group:nth-child(4){
+    margin-top: -20px !important;
+}
+.form-group label:nth-child(2){
+    transform: translateY(-50px);
+}
+
+.btn-cancel {
+    border: 1px solid #550000 !important; /* Dark red border */
+    color: #800000 !important; /* Dark red text */
+}
+
+.btn-submit {
+    background-color: #550000 !important;
+    color: white !important;
+}
+.btn-submit:hover{
+    background-color: #800505 !important;
+    color:white !important;
+}   
+
+.event-type{
+    margin-top: -20px !important;
+}
+
+.row .mt-1{
+    height: 100px !important;
+}
+
+/*TEXT FIELD LABELS*/
+.form-group label{
+    position: relative;
+    transform: translateY(17px);
+    left: 12px;
+    background-color: white;
+    transition: 0.3s ease;
+    font-size: 12px;
+    z-index: 1;
+}
+
+/*DATE TIME PICKER OVERWRITE*/
+.datepicker table tr td.active, .datepicker table tr td.active.disabled, .datepicker table tr td.active.disabled:hover, .datepicker table tr td.active:hover {
+    background-color: #550000 !important;
+    color: #fff !important;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, .25);
+    background-image: linear-gradient(to bottom, #550000, #800505) !important;
+}
+
+.datepicker table tr td.today, 
+.datepicker table tr td.today.disabled, 
+.datepicker table tr td.today.disabled:hover, 
+.datepicker table tr td.today:hover {
+    border: 1px solid #550000 !important; /* Define a solid border to apply the image */
+    background-color: #fff !important; /* Optional: Set a background color for better contrast */
+    background-image: linear-gradient(to bottom, white, white) !important;
+}
+
+
+/*TIME SCHEDULE*/
+.event-time-schedule{
+    display: flex;
+    justify-content: space-evenly;
+}
+.event-time-schedule .input-group{
+    width: 150px;
+}
+.div-title{
+    color: #550000;
+    display: flex;
+    justify-content:flex-start;
+}
+.check-div{
+    display: flex;
+}
+.checkInLabel{
+    margin-top: 15px;
+    font-size: 12px;
+    color: #550000;
+    display: flex;
+    justify-content: flex-start;
+    font-weight: 500;
+}
+
+.startEndLabel{
+    position: relative;
+    transform: translateY(9px);
+    left: 12px;
+    width:fit-content;
+    background-color: white;
+    transition: 0.3s ease;
+    font-size: 12px;
+    z-index: 1;
+}
+
+
+/*assign officer*/
+.ass-div-title{
+    margin-top: -32px;
+    color: #550000;
+}
+.container-border{
+    padding: 1rem;
+    display: flex;
+    justify-content: flex-start;
+    gap: 9px;
+    align-items: center;
+}
+
+.officer-icon img{
+    width: 50px;
+    height: 50px;
+}
+input[type="time"]::-webkit-time-picker-indicator {
+    color:#550000;
+}
+select #officer_id .form-select{
+    width: 30px !important;
+}
+
+/*new officer btn*/
+.btn-new-officer{
+    background-color: #550000 !important;
+    border: transparent !important;
+    color: white !important;
+    border-radius: 20px;
+    font-size: 12px;
+}
+.btn-new-officer:hover{
+    background-color: #800505 !important;
+    color:white !important;
+}
+/*checkbox*/
+.checkbox-container {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 348px;
+    justify-content: center;
+    gap: 9px;
+  }
+
+  .checkbox-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    background-color: #d3d3d3; /* Gray background */
+    color: #5a0e0e; /* Dark red text */
+    border-radius: 8px;
+    padding: 3px;
+    width: 70px;
+    box-sizing: border-box;
+    font-size: 12px;
+  }
+
+  .checkbox-item input[type="checkbox"] {
+    accent-color: #5a0e0e; /* Dark red checkbox */
+    width: 16px;
+    height: 16px;
+  }
+
+
+.text-success{
+    color: #550000 !important;
+}
+.success-icon {
+    width: 50px;
+    height: 50px;
+    color: #550000; /* Dark red background */
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.success-icon i {
+    font-size: 50px;
+}
+
+.form-group #assign_off{
+    display: flex;
+}

@@ -6,15 +6,18 @@
 
 body {
     margin: 0;
-    font-family: Arial, sans-serif;
+    font-family: 'Poppins', sans-serif;
     background: linear-gradient(308deg, #fff 50%, #550000 50%);
     overflow: hidden;
+    background-repeat: no-repeat;
+    height: auto;
 }
 
 
 .container{
     display: flex;
     margin: 0 !important;
+    height: 100vh;
  /*   animation-name: log-in;
     animation-duration: 1s;*/
 }
@@ -44,7 +47,7 @@ body {
 }
 
 .left {
-    width: 90%;
+    width: 100%;
     display: flex;
     align-items: center;
     text-align: center;
@@ -96,7 +99,7 @@ body {
 
 .form-group input {
     width: 30vw;
-    padding: 12px 40px 12px 12px; /* Extra padding for icon space */
+    padding: 7px 40px 9px 7px; /* Extra padding for icon space */
     border: 1.5px solid #cccccc;
     border-radius: 5px;
     font-size: 16px;

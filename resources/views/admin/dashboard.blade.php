@@ -17,34 +17,6 @@
         <section class="col-lg-12">
           <section class="row">
 
-            <!-- Customers Card
-            <div class="col-xxl-1 col-xl-1 ">
-
-              <div class="card info-card customers-card ">
-                
-             
-                <div class="card-date">
-                  <label id="date"></label>
-              </div>
-              <div class="stud_gif">
-                <img src="img/images/image-removebg-preview (45).png">
-              </div>
-
-                <div class="card-body">
-
-                  <h5 class="card-title-info">Welcome back, <span class="stud_name" id="stud_name"></span>!</h5>
-               
-                    <div class="card-info">
-                        <h6>Always stay updated in your student portal.</h6>
-                    </div>
-                  
-                    
-                    
-
-                </div> 
-              </div>
-
-            </div> End of Top card-->
 
             <div class="col-xxl-4 col-md-6">
               <div class="card info-card sales-card" id="wlcm_card">
@@ -62,9 +34,7 @@
                   <h5 id="wlcm_mssge_card" class="wlcm_mssge_card">Welcome back!</h5>
 
                 </div>
-                 <!--<div class="dash_illustrations">
-                      <img src="img/images/Thesis-rafiki-removebg-preview.png" alt="student doing thesis">
-                    </div>-->
+                 
               </div>
             </div><!-- End Number of Exams Paid -->  
   
@@ -81,13 +51,8 @@
                     <h5 id="current_event" class="current_event">TCCSTFI Intramurals 2024</h5>
 
                   </div>
-
-                 <!-- <div class="dash_illustrations">
-                    <img src="img/images/Thesis-rafiki-removebg-preview.png" alt="student doing thesis">
-                  </div>-->
-
                 </div>
-              </div><!-- End Total Assessmet -->
+              </div><!-- End of cueewnt event -->
   
               <div class="col-xxl-4 col-md-6">
                 <div class="card info-card sales-card">
@@ -117,13 +82,8 @@
                         </table>
                       </div>
                   </div>
-                  
-                  <!--<div class="dash_illustrations">
-                    <img src="img/images/Thesis-rafiki-removebg-preview.png" alt="student doing thesis">
-                  </div>-->
-
                 </div>
-              </div><!-- End Sof Current Balance -->
+              </div>
   
               <div class="col-xxl-4 col-md-6">
                 <div class="card info-card sales-card">
@@ -150,15 +110,9 @@
                         <span class="legend-text">Total Registered Students</span>
                       </div>
                     </div>
-                  </div>
-                  
-  
-                <!--  <div class="dash_illustrations">
-                    <img src="img/images/Thesis-rafiki-removebg-preview.png" alt="student doing thesis">
-                  </div>-->
-                  
+                  </div>      
                 </div>
-              </div><!-- End Sof Current Balance -->
+              </div>
             </section>
               
           </section>
@@ -216,12 +170,5 @@ const myDoughnutChart = new Chart(ctx, {
   data: data,
   options: options,
 });
-
-
-
 </script>
 @endsection
- 
-
-  
- 

@@ -3,6 +3,7 @@
 <aside class="sidebar" id="sidebar">
     <div class="logo-details">
         <img src="{{ asset('img/tccstfi-logo.png') }}" alt="tccstfi_logo">
+        <span class="logo_name">SSEAS</span>
     </div>
     <ul class="nav-links">
         <!-- Dashboard -->
@@ -21,22 +22,54 @@
                     Manage
                 </small>
             </div>
-        
 
-        <!--Officers-->
+        
+        {{-- School Year --}}
         <li>
-            <a href="{{route('manage_officer')}}" class="{{request()->routeIs('manage_officer') ? 'active' : ''}}">
-                <i class="fa-solid fa-user"></i>
-                <span class="link_name">Officers</span>
+            <a href="{{route('manage_schoolyear')}}" class="{{request()->routeIs('manage_schoolyear') ? 'active' : ''}}">
+                <i class="fa-solid fa-school"></i>
+                <span class="link_name">School Year</span>
             </a>
             <ul class="sub-menu blank">
-                <li><a class="link_name" href="">Officers</a></li>
+                <li><a class="link_name" href="">School Year</a></li>
             </ul>
         </li>
 
+        <!--Officers-->
+        {{-- <li>
+            <div class="iocn-link">
+                <a href="{{route('manage_officer')}}" class="{{request()->routeIs('manage_officer') ? 'active' : ''}}">
+                    <i class="fa-solid fa-user"></i>
+                    <span class="link_name">Users</span>
+                    <i class='bx bxs-chevron-down arrow' ></i>
+                </a>
+            </div>
+            <ul class="sub-menu">
+                <li><a class="link_name" href="">Admin</a></li>
+                <li><a href="{{route('manage_officer')}}" class="">Student Officers</a></li>
+            </ul>
+        </li> --}}
+
+
+        {{-- USERS --}}
+        <li>
+            <div class="iocn-link">
+              <a href="#" disabled>
+                <i class="fa-solid fa-user"></i>
+                <span class="link_name">Users</span>
+              </a>
+              <i class='bx bxs-chevron-down arrow' ></i>
+            </div>
+            <ul class="sub-menu">
+                <li><h5 class="link_name" style="color:white;">Users</h5></li>
+                <li><a href="{{route('admin_page')}}">Admin</a></li>
+                <li><a href="{{route('manage_officer')}}" class="{{request()->routeIs('manage_officer') ? 'active' : ''}}">Student Officers</a></li>
+            </ul>
+          </li>
+
         <!-- Events -->
         <li>
-            <a href="" class="">
+            <a href="{{route('manage_event')}}" class="{{request()->routeIs('manage_event') ? 'active' : ''}}">
                 <i class="fa-solid fa-calendar-days"></i>
                 <span class="link_name">Events</span>
             </a>
@@ -83,9 +116,28 @@
                 <li><a class="link_name" href="">Report</a></li>
             </ul>
         </li>
+
+        <div class="px-2 pb-2">
+            <small class="d-block px-1" style="color: rgba(255, 255, 255, .6); font-size:12px;">
+                Settings
+            </small>
+        </div>
+
+        <!--Validation-->
+        <li>
+            <a href="" class="">
+                <i class="bi bi-check-circle-fill"></i>
+                <span class="link_name">Validation</span>
+            </a>
+            <ul class="sub-menu blank">
+                <li><a class="link_name" href="">Validation</a></li>
+            </ul>
+        </li>
+
+
         <!-- Logout -->
         <li>
-            <a href="{{route('admin_logout')}}" style=margin-top:100px>
+            <a href="{{route('admin_logout')}}" style="margin-top: 15px;">
                 <i class="fa-solid fa-right-from-bracket"></i>
                 <span class="link_name logout">Log Out</span>
             </a>
@@ -93,15 +145,22 @@
                 <li><a class="link_name" href="#">Log Out</a></li>
             </ul>
         </li>
+
+
     </ul>
 </aside>
 
-<style>
+{{-- <style>
     .nav-links li a.active{
-        background-color:rgba(54, 17, 17, .90);
+        /* background-color:rgba(54, 17, 17, .70); */
+        color: white;
+    }
+    .nav-links li .sub-menu  a.activesub{
+        color: white !important;
+        background-color: transparent;
     }
 
-</style>
+</style> --}}
 <script>
     document.addEventListener('DOMContentLoaded', function () {
     const menuLinks = document.querySelectorAll('.nav-links li a');

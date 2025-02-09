@@ -2,15 +2,10 @@
 @section('title', 'SSEA | Officer Profile')
 @section('content')
 
-<link rel="stylesheet" href="{{ asset('css/pages-css/officers.css') }}">
-@include('partials.sidebar')
-<x-header-section>
-    Officers
-</x-header-section>
+<link rel="stylesheet" href="{{ asset('css/admin/pages/officers.css') }}">
 
-<section id="main" class="main">
-    <div class="d-flex justify-content-start align-items-center mb-3">
-            <a href="{{ route('admin_officer') }}" style="text-decoration: none; color: #550000; font-size: 15px">
+    <div class="d-flex justify-content-start align-items-center mb-3 profile-card">
+            <a href="{{ route('manage_officer') }}" style="text-decoration: none; color: #550000; font-size: 15px">
                   <i class="fa-solid fa-circle-arrow-left"></i> 
             </a>
         <div class="officer_profile_title">
@@ -18,16 +13,15 @@
         </div>
     </div>
 
-  
     <div class="officer-detail-container mt-4">
         <div class="officer-detail">
             <div class="off_name">
-             <h6>Name: <span id="name" class="officer_name"><strong>{{$user->name}}</strong></span></h6>
+             <h6>Name: <span id="name" class="officer_name"><strong>{{$officer->name}}</strong></span></h6>
             </div>
             <div class="off_position">
-                <h6>Position: <span id="position" class="position"><strong>@if($user->usertype == 1)
+                <h6>Position: <span id="position" class="position"><strong>@if($officer->usertype == 1)
                     Admin
-                @elseif($user->usertype == 2)
+                @elseif($officer->usertype == 2)
                     Student Officer
                 @else
                 Unknown
@@ -49,14 +43,13 @@
 
         <tbody id="officers-profile">
             <tr>
-                <td id="event-clm">Intramurals 2024</td>
-                <td id="date-clm">09/11/2024 - 09/15/2024</td>
-                <td id="status-cls">Wholeday</td>
-                <td id="edit-clm">Done</td>
+                <td id="event-clm"></td>
+                <td id="date-clm"></td>
+                <td id="status-cls"></td>
+                <td id="edit-clm"></td>
             </tr>
         </tbody>
     </table>
-</section>
 
 <script>
     $(document).ready(function(){

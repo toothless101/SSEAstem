@@ -6,7 +6,7 @@
 
 @include('partials.sidebar')
 <x-header-section>
-    Student Officers
+    Admin
 </x-header-section>
 
     
@@ -63,23 +63,17 @@
                 </thead>
 
                 <tbody id="assigned_officer">
-                    @foreach ($users as $key => $user) <!--$user variable--->
+                    {{-- @foreach ($users as $key => $user) <!--$user variable---> --}}
                         <tr>
-                            <td>{{ ++$key}}</td>
-                            <td><img src="/images/{{ $user->user_img}}" style="width: 30px; height: 30px; border-radius: 50px"></td>
-                            <td>{{ $user->name}}</td>
-                            <td>{{ $user->email}} </td>
-                            <td>@if($user->usertype == 1)
-                                    Admin
-                                @elseif($user->usertype == 2)
-                                    Student Officer
-                                @else
-                                Unknown
-                                @endif
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>
                             </td>
                             
                             <td>
-                                <!-- Edit Button -->
+                                {{-- <!-- Edit Button -->
                                 <a href="#" data-bs-toggle="modal" data-bs-target="#editOfficerModal{{$user->id}}" style="background-color: transparent; border: none;">
                                     <i class="bi bi-pencil-fill" style="color: #550000;"></i>
                                 </a>
@@ -96,12 +90,12 @@
                                     <button type="submit" style="background-color: transparent; border: none;">
                                         <i class="bi bi-trash-fill" style="color: #550000; margin-left: 5px;"></i>
                                     </button>
-                                </form>
+                                </form> --}}
                             </td>  
 
                             <td>Assigned </td>
                         </tr>
-                    @endforeach
+                    {{-- @endforeach --}}
                     
                 </tbody>
             </table>
@@ -111,9 +105,9 @@
         
     </section>
 
-    {{-- manage officer modals --}}
+    {{-- manage officer modals
 @include('admin.pages.officer.officer-modals.add-officer-modal') 
-@include('admin.pages.officer.officer-modals.edit-officers')
+@include('admin.pages.officer.officer-modals.edit-officers') --}}
 
 
 
