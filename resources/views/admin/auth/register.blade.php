@@ -23,15 +23,25 @@
             @csrf
             
             <div class="form-group mb-4 position-relative">
-                <input type="text" id="fullname" name="fullname" autofocus>
-                <label for="fullname">Full Name</label>
+                <input type="text" id="firstname" name="firstname" autofocus>
+                <label for="firstname">First Name</label>
                 <i class="fas fa-user icon"></i>
 
-                @error('fullname')
+                @error('firstname')
                     <span class="text-danger">{{ $message }}</span>     
                 @enderror
             </div>
-            
+
+            <div class="form-group mb-4 position-relative">
+                <input type="text" id="lastname" name="lastname" autofocus>
+                <label for="lastname">Last Name</label>
+                <i class="fas fa-user icon"></i>
+
+                @error('lastname')
+                    <span class="text-danger">{{ $message }}</span>     
+                @enderror
+            </div>
+
             <div class="form-group mb-4 position-relative">
                 <input type="text" id="email" name="email" autofocus>
                 <label for="fullname">Email</label>
@@ -87,9 +97,9 @@
             <div class="school_logo">
                 <img src="{{ asset('img/tccstfi-logo.png') }}" alt="tccstfi_logo">
             </div>
-            <div class="ssc_logo">
+            {{-- <div class="ssc_logo">
                 <img src="{{ asset('img/ssc-logo.png') }}" alt="tccstfi_logo">
-            </div>
+            </div> --}}
         </div>
     </div>
 </div>

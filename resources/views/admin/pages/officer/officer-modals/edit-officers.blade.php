@@ -1,5 +1,4 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-<link rel="stylesheet" href="{{ asset('css/admin/pages/officers.css') }}">
 
 @foreach ($users as $user)
 <div class="modal fade" id="editOfficerModal{{$user->id}}" tabindex="-1" aria-labelledby="editOfficerModalLabel" aria-hidden="true">
@@ -16,14 +15,12 @@
                     @method('PUT')
 
                     <!-- Centered Image Preview -->
-                    <div class="d-flex justify-content-center mb-3">
+                    <div class="d-flex mb-3 flex-column flex-wrap align-items-center">
                         <div class="image-holder text-center">
                             <img id="output{{$user->id}}" src="{{ asset('images/' . $user->user_img) }}" 
                                  alt="Officer Image" class="img-thumbnail" width="150" height="150">
                         </div>
-                    </div>
 
-                    <div class="row mb-3">
                         <div class="col-md-6">
                             <label for="user_img{{$user->id}}" class="form-label">Profile Image</label>
                             <input type="file" class="form-control" id="user_img{{$user->id}}" name="user_img" 
@@ -32,11 +29,21 @@
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="firstname{{$user->id}}" class="form-label">First Name</label>
+                            <input type="text" class="form-control" id="firstname{{$user->id}}" name="firstname" value="{{ $user->firstname }}">
+                            @error('firstname')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
 
                         <div class="col-md-6">
-                            <label for="name{{$user->id}}" class="form-label">Full Name</label>
-                            <input type="text" class="form-control" id="name{{$user->id}}" name="name" value="{{ $user->name }}">
-                            @error('name')
+                            <label for="lastname{{$user->id}}" class="form-label">Last Name</label>
+                            <input type="text" class="form-control" id="lastname{{$user->id}}" name="lastname" value="{{ $user->lastname }}">
+                            @error('lastname')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
@@ -65,13 +72,35 @@
                         </div>
 
                         <div class="col-md-6">
+                            <label for="position" class="form-label">Ogranization</label>
+                            <select class="form-select" name="org_type" id="org_type">
+                                <option selected>--</option>
+                                <option value="1" {{$user ->org_type == 1 ? 'selected' : ''}}>SSC</option>
+                                <option value="2" {{$user ->org_type == 2 ? 'selected' : ''}}>SSLG</option>
+                            </select>
+                            @error('org_type')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <div class="col-md-6">
                             <label for="username{{$user->id}}" class="form-label">Username</label>
-                            <input type="text" class="form-control" id="username{{$user->id}}" name="username" value="{{ $user->username }}">
+                            <input type="text" class="form-control" id="username{{$user->id}}" name="username" value="{{ $user->username }}" required readonly>
                             @error('username')
                                 <span class="text-danger">{{ $message }}</span> 
                             @enderror
                         </div>
+
+                        
+
                     </div>
+
+                    <div class="col-md-6">
+                         <div class="col-md-12 d-flex justify-content-start align-items-center">
+                            <a href="" class="form-label forgot_pass" style="font-size:15px; text-decoration: none; color: #550000; font-weight: 500;">Forgot Password?</a>
+                         </div>
+                    </div>
+
 
                     <div class="modal-footer mt-3">
                         <button type="button" class="btn btn-cancel" data-bs-dismiss="modal">Cancel</button>
@@ -86,7 +115,7 @@
 
 {{-- Success Modal --}}
 <div class="modal fade" id="successUpdateModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-dialog modal-dialog-centered" style="width: 500px;">
         <div class="modal-content text-center p-4">
             <div class="modal-body">
                 <div class="mb-3">
@@ -104,7 +133,7 @@
 
 {{-- Error Modal --}}
 <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-dialog modal-dialog-centered" style="width: 500px;">
         <div class="modal-content text-center p-4">
             <div class="modal-body">
                 <div class="mb-3">
@@ -119,6 +148,7 @@
         </div>
     </div>
 </div>
+
 
 <script>
     function previewImage(event, userId) {

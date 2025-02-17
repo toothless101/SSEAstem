@@ -1,0 +1,139 @@
+.btn-new-sy{
+    background-color: #550000 !important;
+    border: transparent !important;
+    color: white !important;
+}
+.btn-new-sy:hover{
+    background-color: #800505 !important;
+    color:white !important;
+}
+
+.search-container {
+    position: relative; 
+    display: inline-block; 
+    width: 380px; 
+}
+
+.search-input {
+    width: 100%; 
+    padding: 5px 40px 5px 15px; 
+    border-top: 1px solid transparent;
+    border-right: 1px solid transparent;
+    border-left: 1px solid transparent;
+    border-radius: 10px;
+    outline: none;
+    font-size: 16px;
+    background-color: #B3B3B380; 
+}
+
+.search-input::placeholder {
+    color: #888; 
+}
+
+.search-btn {
+    position: absolute; 
+    right: 10px; 
+    top: 50%; 
+    transform: translateY(-50%); 
+    background: none; 
+    border: none;
+    color: #555; 
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.search-btn:hover {
+    color: #333; /* Darker color on hover */
+}
+
+.table-responsive {
+    overflow-x: auto; /* Enable horizontal scrolling */
+    width: 100%;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+table thead tr th{
+    color: #550000;
+    font-size: 13px;
+    font-weight: lighter;
+}
+
+tbody td {
+    color: #550000;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+tbody tr:nth-child(odd){
+    background-color:rgba(255, 173, 96, .50) !important;
+
+}
+
+tbody tr:nth-child(even){
+    background-color: #FFEEAD !important;
+}
+
+tbody tr td{
+    text-align: start !important;
+}
+
+/* modal */
+.modal-header{
+    color: #550000;
+}
+
+.modal-header .btn-close {
+    background-color: transparent;
+    border: none;
+    font-size: 13px;
+}
+
+.form-label {
+    position: relative;
+    transform: translateY(16px);
+    left: 12px;
+    background-color: white;
+    transition: 0.3s ease;
+    font-size: 12px;
+    top: -20;
+}
+
+.btn-cancel {
+    border: 1px solid #550000; /* Dark red border */
+    color: #800000; /* Dark red text */
+}
+
+.btn-submit {
+    background-color: #550000;
+    color: white;
+}
+
+.btn-submit:hover{
+    background-color: #800505;
+    color:white;
+}
+
+.text-success{
+    color: #49d885 !important;
+}
+.success-icon {
+    width: 50px;
+    height: 50px;
+    color: #49d885; /* Dark red background */
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.success-icon i {
+    font-size: 50px;
+}
+
+.modal-content {
+    border: 2px solid #550000;
+}
+

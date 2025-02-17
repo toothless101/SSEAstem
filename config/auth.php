@@ -40,6 +40,16 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+
+        'admin' => [ // Admin Guard
+        'driver' => 'session',
+        'provider' => 'admins',
+        ],
+
+        'student_officer' => [ // Student Officer Guard
+            'driver' => 'session',
+            'provider' => 'student_officers',
+        ],
     ],
 
     /*

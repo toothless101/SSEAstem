@@ -14,9 +14,9 @@
             <div class="school_logo">
                 <img src="{{ asset('img/tccstfi-logo.png') }}" alt="tccstfi_logo">
             </div>
-            {{-- <div class="ssc_logo">
+            <div class="ssc_logo">
                 <img src="{{ asset('img/ssc-logo.png') }}" alt="ssc_logo">
-            </div> --}}
+            </div>
         </div>
         
     </div>
@@ -28,11 +28,11 @@
 
         <!-- Login Message -->
         <div class="createmsg">
-            <h2>Login as Admin user</h2>
+            <h2>Login as Student Officer</h2>
         </div>
 
         <!-- Login Form -->
-        <form method="POST" action="{{route('login_admin')}}">
+        <form action="{{route('student_officer_login')}}" method="POST">
             @csrf
 
             @if (session('success'))
@@ -74,12 +74,6 @@
             </div>
 
         </form>
-
-        <!-- Signup Prompt -->
-        <div class="signup_btn">
-            Don't have an account? 
-            <a href="{{route('admin_register')}}">Sign Up</a>
-        </div>
     </div>
 
 </div>

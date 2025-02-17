@@ -16,7 +16,7 @@
     <div class="officer-detail-container mt-4">
         <div class="officer-detail">
             <div class="off_name">
-             <h6>Name: <span id="name" class="officer_name"><strong>{{$officer->name}}</strong></span></h6>
+             <h6>Name: <span id="name" class="officer_name"><strong>{{$officer->firstname}} {{$officer->lastname}}</strong></span></h6>
             </div>
             <div class="off_position">
                 <h6>Position: <span id="position" class="position"><strong>@if($officer->usertype == 1)

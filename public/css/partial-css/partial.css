@@ -256,6 +256,10 @@ body::-webkit-scrollbar {
   background-color:rgba(54, 17, 17, .90);
 }
 
+.nav-links li .sub-menu a.active-sub {
+  color: #fff;
+  opacity: 1;
+}
 /*--------------------------------------------------------------
 # Header Nav
 --------------------------------------------------------------*/

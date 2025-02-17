@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -13,8 +14,8 @@ return new class extends Migration
     {
         Schema::table('events', function (Blueprint $table) {
             //
-            $table->date('event_start_date');
-            $table->date('event_end_date');
+            $table->date('event_start_date')->default(DB::raw('CURRENT_DATE'));
+            $table->date('event_end_date')->default(DB::raw('CURRENT_DATE'));
             $table->time('event_starttime_am')->nullable();
             $table->time('event_endtime_am')->nullable();
             $table->time('event_starttime_pm')->nullable();

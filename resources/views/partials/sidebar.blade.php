@@ -62,8 +62,8 @@
             </div>
             <ul class="sub-menu">
                 <li><h5 class="link_name" style="color:white;">Users</h5></li>
-                <li><a href="{{route('admin_page')}}">Admin</a></li>
-                <li><a href="{{route('manage_officer')}}" class="{{request()->routeIs('manage_officer') ? 'active' : ''}}">Student Officers</a></li>
+                <li><a href="{{route('admin_page')}}" class="{{request()->routeIs('admin_page') ? 'active-sub' : ''}}">Admin</a></li>
+                <li><a href="{{route('manage_officer')}}" class="{{request()->routeIs('manage_officer') ? 'active-sub' : ''}}">Student Officers</a></li>
             </ul>
           </li>
 

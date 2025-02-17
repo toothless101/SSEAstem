@@ -242,12 +242,12 @@ input.form-control {
 
 /*SUCCESS MODAL*/
 .text-success{
-    color: #550000 !important;
+    color: #49d885 !important;
 }
 .success-icon {
     width: 50px;
     height: 50px;
-    color: #550000; /* Dark red background */
+    color: #49d885; /* Dark red background */
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -324,4 +324,8 @@ tbody tr:nth-child(even){
   .officer-info {
     display: flex;
     align-items: center;
+  }
+
+  .forgot_pass:hover{
+    color: #800505 !important;
   }

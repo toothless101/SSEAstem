@@ -1,5 +1,5 @@
 @extends('layout.app')
-@section('title', 'SSEA | Officers')
+@section('title', 'SSEA | Admin')
 @section('content')
 
 <link rel="stylesheet" href="{{ asset('css/admin/pages/officers.css') }}">
@@ -33,11 +33,11 @@
         @endif
 
         <div id="officerListSection">
-            <div class="d-flex justify-content-between align-items-center mb-3">
+            <div class="d-flex justify-content-end align-items-center mb-3">
                 <!-- New Officer Button -->
-                <button class="btn btn-new-officer" data-bs-toggle="modal" data-bs-target="#addOfficerModal">
+                {{-- <button class="btn btn-new-officer" data-bs-toggle="modal" data-bs-target="#addOfficerModal">
                     + New Officer
-                </button>
+                </button> --}}
 
             
                 <div class="search-container">
@@ -53,32 +53,36 @@
                 <thead>
                     <tr>
                         <th>No.</th>
-                        <th>Image</th>
                         <th>Name</th>
                         <th>Email</th>
                         <th>User Type</th>
                         <th>Action</th>
-                        <th>Status</th>
+                        {{-- <th>Status</th> --}}
                     </tr>
                 </thead>
 
                 <tbody id="assigned_officer">
-                    {{-- @foreach ($users as $key => $user) <!--$user variable---> --}}
+                    @foreach ($users as $key => $user) <!--$user variable--->
                         <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td>
+                            <td>{{++$key}}</td>
+                            <td>{{$user ->firstname}} {{$user ->lastname}}</td>
+                            <td>{{$user ->email}}</td>
+                            <td>@if($user->usertype == 1)
+                                Admin
+                            @elseif($user->usertype == 2)
+                                Student Officer
+                            @else
+                            Unknown
+                            @endif
                             </td>
                             
                             <td>
-                                {{-- <!-- Edit Button -->
+                                <!-- Edit Button -->
                                 <a href="#" data-bs-toggle="modal" data-bs-target="#editOfficerModal{{$user->id}}" style="background-color: transparent; border: none;">
                                     <i class="bi bi-pencil-fill" style="color: #550000;"></i>
                                 </a>
                     
-                                <!-- View Profile Button -->
+                                {{-- <!-- View Profile Button -->
                                 <button type="button" class="view-officer" data-id="{{$user->id}}" style="background-color: transparent; border: none;">
                                     <i class="bi bi-eye-fill" style="color: #550000; margin-left: 5px;"></i>
                                 </button>
@@ -90,12 +94,12 @@
                                     <button type="submit" style="background-color: transparent; border: none;">
                                         <i class="bi bi-trash-fill" style="color: #550000; margin-left: 5px;"></i>
                                     </button>
-                                </form> --}}
+                                </form> --}} 
                             </td>  
 
-                            <td>Assigned </td>
+                            {{-- <td>Assigned </td> --}}
                         </tr>
-                    {{-- @endforeach --}}
+                    @endforeach
                     
                 </tbody>
             </table>
@@ -106,8 +110,8 @@
     </section>
 
     {{-- manage officer modals
-@include('admin.pages.officer.officer-modals.add-officer-modal') 
-@include('admin.pages.officer.officer-modals.edit-officers') --}}
+@include('admin.pages.officer.officer-modals.add-officer-modal') --}}
+@include('admin.pages.officer.officer-modals.edit-officers') 
 
 
 

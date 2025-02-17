@@ -11,7 +11,7 @@
 
     
 
-    <section id="main" class="main">
+<section id="main" class="main">
 
             <!-- Officer profile div -->
         <div id="officerProfileSection" style="display: none;">
@@ -55,7 +55,7 @@
                         <th>No.</th>
                         <th>Image</th>
                         <th>Name</th>
-                        <th>Email</th>
+                        <th>Organization</th>
                         <th>User Type</th>
                         <th>Action</th>
                         <th>Status</th>
@@ -67,8 +67,15 @@
                         <tr>
                             <td>{{ ++$key}}</td>
                             <td><img src="/images/{{ $user->user_img}}" style="width: 30px; height: 30px; border-radius: 50px"></td>
-                            <td>{{ $user->name}}</td>
-                            <td>{{ $user->email}} </td>
+                            <td>{{ $user->firstname}} {{ $user->lastname}}</td>
+                            <td>@if($user->org_type == 1)
+                                SSC
+                                 @elseif($user->org_type == 2)
+                                SSLG
+                                @else
+                                Unknown
+                                @endif
+                            </td>
                             <td>@if($user->usertype == 1)
                                     Admin
                                 @elseif($user->usertype == 2)
@@ -114,10 +121,6 @@
     {{-- manage officer modals --}}
 @include('admin.pages.officer.officer-modals.add-officer-modal') 
 @include('admin.pages.officer.officer-modals.edit-officers')
-
-
-
-    
 
 <script>
     $(document).ready(function(){

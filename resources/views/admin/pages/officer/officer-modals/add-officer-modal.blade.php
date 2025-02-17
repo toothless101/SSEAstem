@@ -1,5 +1,5 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-<link rel="stylesheet" href="{{  asset('css/admin/pages/officers.css') }}">
+{{-- <link rel="stylesheet" href="{{  asset('css/admin/pages/officers.css') }}"> --}}
 
 <div class="modal fade" id="addOfficerModal" tabindex="-1" aria-labelledby="addOfficerModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -14,14 +14,11 @@
                 @csrf
         
                 <!-- Centered Image Preview -->
-                <div class="d-flex justify-content-center mb-3">
+                <div class="d-flex mb-3 flex-column flex-wrap align-items-center">
                     <div class="image-holder text-center">
                         <img id="output" src="{{ asset('img/no-image-available.png') }}" alt="Placeholder Image">
                     </div>
-                </div>
-        
-                <!-- Full Name and File Upload -->
-                <div class="row mb-3">
+
                     <div class="col-md-6">
                         <label for="user_img" class="form-label">Profile Image</label>
                         <input type="file" class="form-control" id="user_img" name="user_img" accept="image/*" onchange="loadFile(event)">
@@ -29,11 +26,22 @@
                             <span class="text-danger">{{ $message }}</span>     
                         @enderror
                     </div>
+                </div>
+        
+                <!-- Full Name and File Upload -->
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="fullname" class="form-label">First Name</label>
+                        <input type="text" class="form-control" id="firstname" name="firstname" value="{{old ('firstname')}}" required oninput="generateUsername()">
+                        @error('firstname')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
 
                     <div class="col-md-6">
-                        <label for="fullname" class="form-label">Full Name</label>
-                        <input type="text" class="form-control" id="name" name="name" value="{{old ('name')}}">
-                        @error('name')
+                        <label for="fullname" class="form-label">Last Name</label>
+                        <input type="text" class="form-control" id="lastname" name="lastname" value="{{old('lastname')}}" required oninput="generateUsername()">
+                        @error('lastname')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </div>
@@ -61,9 +69,22 @@
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </div>
+
+                    <div class="col-md-6">
+                        <label for="position" class="form-label">Ogranization</label>
+                        <select class="form-select" name="org_type" id="org_type">
+                            <option selected>--</option>
+                            <option value="1" {{old('org_type') == 1 ? 'selected' : ''}}>SSC</option>
+                            <option value="2" {{old('org_type') == 2 ? 'selected' : ''}}>SSLG</option>
+                        </select>
+                        @error('org_type')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
+
                     <div class="col-md-6">
                         <label for="username" class="form-label">Username</label>
-                        <input type="text" class="form-control" id="username" name="username" value="{{old ('username')}}">
+                        <input type="text" class="form-control" id="username" name="username" value="{{old ('username')}}" required readonly>
                         @error('username')
                             <span class="text-danger">{{ $message }}</span> 
                         @enderror
@@ -71,10 +92,7 @@
         
                     <div class="col-md-6 mb-2">
                         <label for="password" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="password" name="password" value="{{old ('password')}}">
-                        @error('password')
-                            <span class="text-danger">{{ $message }}</span>
-                        @enderror
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Default Password is set Automatically" disabled>
                     </div>
                 </div>
         
@@ -83,17 +101,14 @@
                     <button type="submit" class="btn btn-submit">Add</button>
                 </div>
             </form>
-        </div>
-        
-        
+        </div>        
       </div>
-    
   </div>
 </div>   
 
 {{-- Successmodal --}}
 <div class="modal fade" id="successAddModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
+  <div class="modal-dialog modal-dialog-centered" style="width: 500px;">
       <div class="modal-content text-center p-4">
           <div class="modal-body">
               <div class="mb-3">
@@ -111,7 +126,7 @@
 
 {{-- Error Modal --}}
 <div class="modal fade" id="errorAddModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-dialog modal-dialog-centered" style="width: 500px;">
         <div class="modal-content text-center p-4">
             <div class="modal-body">
                 <div class="mb-3">
@@ -151,5 +166,24 @@
         });
     @endif
 
-  
+    function generateUsername(){
+        let firstname = document.getElementById('firstname').value.trim();
+        let lastname = document.getElementById('lastname').value.trim();
+
+        if(firstname.length > 0 && lastname.length > 0){
+            let firstletter = firstname.charAt(0).toUpperCase();
+            let username = firstletter + lastname.toLowerCase();
+            document.getElementById('username').value = username;
+        } else{
+            document.getElementById('username').value = " ";
+        }
+        
+    }
+
+        document.getElementById('firstname').addEventListener('input', generateUsername);
+        document.getElementById('lastname').addEventListener('input', generateUsername);
+     // Run the function when the page loads (in case of pre-filled values)
+     window.onload = function() {
+        generateUsername();
+    };
 </script>

@@ -1,9 +1,3 @@
-<script src="{{asset("js/create-event.js")}}"></script>
-
-<!-- Custom CSS -->
-<link rel="stylesheet" href="{{ asset('css/admin/pages/event.css') }}">
-
-
 <div class="modal fade" id="addEventModal" tabindex="-1" aria-labelledby="addEventModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -22,13 +16,11 @@
                             {{ session('success') }}
                         </div>
                     @endif
-
                     @if (session('error'))
                         <div class="alert alert-danger">
                             {{ session('error') }}
                         </div>
                     @endif
-
                     <div class="row">
                         <!-- Event Name -->
                         <div class="form-group col-md-6">
@@ -39,7 +31,6 @@
                             <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>
-
 
                         <!-- Event Place -->
                         <div class="form-group col-md-6 mb-3">
@@ -85,8 +76,6 @@
                             <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>
-
-
                     </div>
 
                     <!-- Time Schedule -->
@@ -171,6 +160,20 @@
                         </div>
                     </div>
 
+                    <div id="assignedOfficersList" class="mt-3">
+                        <h6>Assigned Officers:</h6>
+                        <ul id="officerNameList"></ul>
+                    </div>
+
+                    <!-- Hidden input to send assigned officer IDs -->
+                    <input type="hidden" id="assigned_officers" name="assigned_officers">
+
+                    <!-- Assign Officer Button -->
+                    <div class="assign_event_officer mb-5 d-flex justify-content-end">
+                        <button type="button" class="btn btn-primary" id="assignOfficerBtn" data-bs-toggle="modal" data-bs-target="#assignOfficerModal">Assign Officer</button>
+                    </div>
+
+
                     <div class="modal-footer">
                         <button type="button" class="btn btn-cancel" data-bs-dismiss="modal">Cancel</button>
                         <button type="submit" class="btn btn-submit">Create Event</button>
@@ -181,8 +184,10 @@
     </div>
 </div>
 
+@include('admin.pages.event.event-modals.assign-officer')
+
 <div class="modal fade" id="successAddEventModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-dialog modal-dialog-centered" style="width: 500px;">
         <div class="modal-content text-center p-4">
             <div class="modal-body">
                 <div class="mb-3">
@@ -200,7 +205,7 @@
   
   {{-- Error Modal --}}
   <div class="modal fade" id="errorAddEventModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-dialog modal-dialog-centered" style="width: 500px;">
           <div class="modal-content text-center p-4">
               <div class="modal-body">
                   <div class="mb-3">
@@ -216,7 +221,6 @@
       </div>
     </div>
 
-@include('admin.pages.event.event-modals.assign-event-officer')
 
 <script>
   
@@ -244,26 +248,23 @@
         });
     });
 
+    
 
+    //SUCCESS/ERROR MODALS
     @if(session('success_add_event'))
         document.addEventListener('DOMContentLoaded', function () {
             const successModal = new bootstrap.Modal(document.getElementById('successAddEventModal'));
-            const assignOfficer = new bootstrap.Modal(document.getElementById('assignOfficerModal'));
             successModal.show();
-            
-            document.getElementById('successAddEventModal').addEventListener('hidden.bs.modal', function(){
-                assignOfficer.show();
-            });
         });
     @endif
 
     @if (session('error_add_event'))
-
         document.addEventListener('DOMContentLoaded', function () {
             const errorModal = new bootstrap.Modal(document.getElementById('errorAddEventModal'));
             errorModal.show();
         });
     @endif
 
+  
 
 </script>

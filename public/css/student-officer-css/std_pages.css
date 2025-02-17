@@ -1,0 +1,176 @@
+
+.search-container {
+    position: relative; 
+    display: inline-block; 
+    width: 380px; 
+}
+
+.search-input {
+    width: 100%; 
+    padding: 5px 40px 5px 15px; 
+    border-top: 1px solid transparent;
+    border-right: 1px solid transparent;
+    border-left: 1px solid transparent;
+    border-radius: 10px;
+    outline: none;
+    font-size: 16px;
+    background-color: #B3B3B380; 
+}
+
+.search-input::placeholder {
+    color: #888; 
+}
+
+.search-btn {
+    position: absolute; 
+    right: 10px; 
+    top: 50%; 
+    transform: translateY(-50%); 
+    background: none; 
+    border: none;
+    color: #555; 
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.search-btn:hover {
+    color: #333; /* Darker color on hover */
+}
+
+
+/*table*/
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+table thead tr th{
+    color: #550000;
+    font-size: 13px;
+    font-weight: lighter;
+    text-align: center !important;
+}
+
+tbody td {
+    color: #550000;
+    font-size: 13px;
+    font-weight: 600;
+    text-align: center !important;
+}
+
+tbody tr:nth-child(odd){
+    background-color:rgba(255, 173, 96, .50) !important;
+
+}
+
+tbody tr:nth-child(even){
+    background-color: #FFEEAD !important;
+}
+
+/*attendance page*/
+.todays-event h6{
+    color:#550000;
+    font-weight: 600;
+}
+
+#event-name{
+    color: #550000;
+    font-weight: 500;
+}
+.e-item h5{
+    font-size: 12px;
+    margin-bottom: 10px;
+    color: #550000;
+    font-weight: 650;
+}
+
+.e-item .label{
+    font-weight: lighter !important;
+}
+
+/* Add vertical borders to colspan and sub-columns */
+.colspan-header,.sub-column, .sub-column1 {
+    border-left: 1px solid #B3B3B3; /* Left border for sub-columns */
+    border-right: 1px solid #B3B3B3; /* Right border for sub-columns */
+}
+
+
+/*-----------OFFICER PROFILE----------*/
+.officerprofile_img img{
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    border: .1px solid #333 !important;
+
+}
+.officer-name-top{
+    color:#550000;
+    font-weight: 500;
+    font-size: 24px;
+}
+
+/* Underline style for input fields */
+#name-input, #username-input, #password-input {
+    border: none;
+    border-bottom: 2px solid #ccc;
+    border-radius: 0;
+    outline: none;
+    transition: border-color 0.3s;
+    background-color: transparent;
+    width: auto;
+}
+
+#name-input:focus, #username-input:focus, #password-input:focus {
+    border-bottom-color: #007bff; /* Change underline color on focus */
+}
+
+.btn-link i {
+    cursor: pointer; /* Pointer cursor for edit icons */
+}
+
+/* Adjust label and input spacing */
+.editable-field {
+    gap: 10px !important; /* Add space between label and input */
+}
+
+.editable-field input {
+    flex-grow: 1;
+}
+
+/* No shadow for focused inputs */
+input:focus {
+    box-shadow: none;
+}
+
+.officer-name, .officer-username, .officer-password{
+    color:#550000;
+}
+#officer-assigned-event-table thead, th{
+    background-color: #FFEEAD !important;
+    font-weight: lighter !important;
+}
+
+#assigned-event tr, td{
+    background-color:rgba(187, 186, 185, 0.5) !important;
+}
+
+/*----------SCAN QR PAGE------------*/
+.instructions{
+    color: #550000;
+}
+
+.table-title{
+    color: #550000;
+}
+
+.table-container .attendees-table thead, tr th{
+    color: #550000 !important;
+    font-weight: lighter;
+    background-color: none !important;
+}
+#attendees-table thead, th{
+    background-color:rgba(187, 186, 185, 0.5) !important;
+    font-weight: lighter !important;
+}
+#attendees-table tr, td{
+    background-color:rgba(187, 186, 185, 0.5) !important;
+}
