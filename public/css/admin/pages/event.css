@@ -310,3 +310,10 @@ select #officer_id .form-select{
 small{
     font-weight: 600;
 }
+#assignedOfficersList h6{
+    color: #550000;
+}
+#officerNameList{
+    color: #550000;
+    font-weight: 600;
+}

@@ -1,9 +1,10 @@
 @extends('layout.app')
 @section('title', 'SSEA | Event')
-@section('content')
-
 <script src="{{asset("js/create-event.js")}}"></script>
 <link rel="stylesheet" href="{{ asset('css/admin/pages/event.css') }}">
+
+@section('content')
+
 
 @include('partials.sidebar')
 
@@ -59,15 +60,22 @@
                             <small><br>Start Time: <strong> {{ $event->start_time }}</strong></small>
                             <small></br>End Time:  <strong> {{ $event->end_time }}</strong></small>
                             <small><br>Date: <strong> {{$event->startDate}} to {{$event->endDate}}</strong></small>
-                            <small><br>S.Y.: <strong></strong></small>
+                            <small><br>S.Y.: <strong>2024-2025</strong></small>
                         </td>
-                        <td>Officer Name</td>
-                        <td>Ongoing</td>
+                        <td> 
+                            @foreach ($event->users()->wherePivot('assignment_type', '!=', 'unassigned')->get() as $officer)
+                                {{ $officer->firstname }} {{ $officer->lastname }}
+                                @if (!$loop->last) 
+                                    ,<br> 
+                                @endif
+                            @endforeach
+                        </td>
+                        <td>Pending</td>
                         <td>
-                            <a href="" class="" data-bs-toggle="modal" data-bs-target="#editEventModal">
+                            <button class="editeventBtn" style="background: transparent; border: none;" data-bs-toggle="modal" data-bs-target="#editEventModal{{$event->id}}">
                                 <i class="bi bi-pencil-fill" style="color: #550000;"></i>
-                            </a>
-
+                            </button>
+                            
                             <!-- Delete Button -->
                             <form action="" method="" style="display:inline;">
                                 <button type="submit" style="background-color: transparent; border: none;">
@@ -86,8 +94,7 @@
 </section>
 
 @include('admin.pages.event.event-modals.create-new-event-modal')
-@include('admin.pages.event.event-modals.edit-events')
-
+@include('admin.pages.event.event-modals.edit-event-modal')
 
 <script>
     $(document).ready(function () {

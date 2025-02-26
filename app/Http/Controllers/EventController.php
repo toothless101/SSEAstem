@@ -117,7 +117,7 @@ class EventController extends Controller
     public function showEvent($event_id){
         $event = Event::findOrFail($event_id);
 
-        //set default values
+        $officers = $event->users()->wherePivot('assignment_type', '!=', 'unassigned')->get();        //set default values
         $start_time = 'N/A';
         $end_time = 'N/A';
         $startDate = Carbon::parse($event->event_start_date)->format('F d, Y');
@@ -138,6 +138,12 @@ class EventController extends Controller
             $end_time = $event->event_endtime_pm? Carbon::parse($event->event_endtime_pm)->format('h:i A') : 'N/A';
         }
 
-        return view('admin.pages.event.event', compact('event','start_time','end_time','startDate','endDate'));
+        return view('admin.pages.event.event', compact('event','start_time','end_time','startDate','endDate', 'officers'));
+    }
+
+    public function editEvent(Request $request, $event_id){
+        $event = Event::find($event_id);
+
+        return view('admin.pages.event.event-modals.edit-event-modal', compact('event'));
     }
 }

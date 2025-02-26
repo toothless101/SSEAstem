@@ -1,5 +1,3 @@
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-
 @foreach ($users as $user)
 <div class="modal fade" id="editOfficerModal{{$user->id}}" tabindex="-1" aria-labelledby="editOfficerModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -90,9 +88,6 @@
                                 <span class="text-danger">{{ $message }}</span> 
                             @enderror
                         </div>
-
-                        
-
                     </div>
 
                     <div class="col-md-6">
@@ -100,7 +95,6 @@
                             <a href="" class="form-label forgot_pass" style="font-size:15px; text-decoration: none; color: #550000; font-weight: 500;">Forgot Password?</a>
                          </div>
                     </div>
-
 
                     <div class="modal-footer mt-3">
                         <button type="button" class="btn btn-cancel" data-bs-dismiss="modal">Cancel</button>

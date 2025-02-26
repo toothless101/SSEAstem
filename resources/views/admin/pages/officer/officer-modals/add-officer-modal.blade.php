@@ -1,5 +1,4 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-{{-- <link rel="stylesheet" href="{{  asset('css/admin/pages/officers.css') }}"> --}}
 
 <div class="modal fade" id="addOfficerModal" tabindex="-1" aria-labelledby="addOfficerModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -82,7 +81,7 @@
                         @enderror
                     </div>
 
-                    <div class="col-md-6">
+                    <div class="col-md-6 mb-2">
                         <label for="username" class="form-label">Username</label>
                         <input type="text" class="form-control" id="username" name="username" value="{{old ('username')}}" required readonly>
                         @error('username')
@@ -90,10 +89,10 @@
                         @enderror
                     </div>
         
-                    <div class="col-md-6 mb-2">
+                    {{-- <div class="col-md-6 mb-2">
                         <label for="password" class="form-label">Password</label>
                         <input type="password" class="form-control" id="password" name="password" placeholder="Default Password is set Automatically" disabled>
-                    </div>
+                    </div> --}}
                 </div>
         
                 <div class="modal-footer">

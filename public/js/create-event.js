@@ -35,16 +35,6 @@
 
     // Initialize layout when the page loads
     updateLayout();
-
-
-    // const addEventModal = document.getElementById('addEventModal');
-
-    // addEventModal.addEventListener('hidden.bs.modal', function () {
-    //     // When the modal is hidden, move focus to the button that opened it or any safe element
-    //     document.activeElement.blur();
-    // });
-
-    //
     
     //FOR ADDING EVENTS WITH ASSIGNING STUDENT OFFICERS!    
     const addEventModal = document.getElementById('addEventModal');

@@ -10,11 +10,20 @@ class SchoolYear extends Model
     //
     use HasFactory;
     protected $table = 'schoolyears';   //tells the laravel the corrected table being created not school_year
-    protected $primaryKey = 'sy_id';   //tell laravel the correct primary key instead of looking for id from schoolyear table (sy_id)
-    public $incrementing = true; 
-    protected $keyType = 'int';
     
     protected $fillable = [
-        'schoolyear'
+        'schoolyear',
+        'is_active'
     ];
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'user_schoolyear')->withTimestamps();
+    }
+
+    //define a relatonship between the SchoolYear and Attendees
+    public function attendees()
+    {
+        return $this->hasMany(Attendees::class);
+    }
 }

@@ -1,6 +1,6 @@
 
 @foreach ($schoolyears as $schoolyear)
-<div class="modal fade" id="editSchoolYear{{$schoolyear->sy_id}}" tabindex="-1" aria-labelledby="editSchoolYearModalLabel" aria-hidden="true">
+<div class="modal fade" id="editSchoolYear{{$schoolyear->id}}" tabindex="-1" aria-labelledby="editSchoolYearModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
@@ -8,7 +8,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="{{route('update_schoolyear', ['schoolyear' => $schoolyear->sy_id])}}" method="POST">
+                <form action="{{route('update_schoolyear', ['schoolyear' => $schoolyear->id])}}" method="POST">
                     @csrf
                     @method('PUT')
                     <!-- Success and Error Messages -->
@@ -24,8 +24,8 @@
                         </div>
                     @endif
                     <div class="col-md-12 mb-3" style="margin-top:-15px;">
-                        <label for="schoolyear{{$schoolyear->sy_id}}" class="form-label">School Year</label>
-                        <input type="text" class="form-control" id="schoolyear{{$schoolyear->sy_id}}" name="schoolyear" value="{{$schoolyear->schoolyear}}">
+                        <label for="schoolyear{{$schoolyear->id}}" class="form-label">School Year</label>
+                        <input type="text" class="form-control" id="schoolyear{{$schoolyear->id}}" name="schoolyear" value="{{$schoolyear->schoolyear}}">
                         @error('schoolyear')
                             <span class="text-danger">{{ $message }}</span> 
                         @enderror

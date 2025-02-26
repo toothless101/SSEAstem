@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AttendeesController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\OfficerController;
@@ -29,7 +30,8 @@ Route::middleware(['auth', 'admin'])->group(function(){
     Route::get('/schoolyear/show/{schoolyear}', [SchoolYearController::class, 'showSchoolYear'])->name('schoolyear_show');
     Route::get('/schoolyear/edit/{schoolyear}', [SchoolYearController::class, 'editSchoolYear'])->name('edit_schoolyear');
     Route::put('/schoolyear/update/{schoolyear}', [SchoolYearController::class, 'updateSchoolYear'])->name('update_schoolyear');
-
+    Route::patch('/schoolyear/active/{schoolyear}', [SchoolYearController::class, 'toggleActive'])->name('toggle_active');
+    
     //OFFICER
     Route::get('/admin/manage/officer', [OfficerController::class, 'officer'])->name('manage_officer');
     Route::post('/admin/manage/officer/create', [OfficerController::class, 'createOfficer'])->name('create_officer');
@@ -44,6 +46,12 @@ Route::middleware(['auth', 'admin'])->group(function(){
     Route::get('/admin/manage/event', [EventController::class, 'event'])->name('manage_event');
     Route::post('/admin/manage/event/create', [EventController::class, 'createEvent'])->name('create_event');
     Route::get('/event/show/{event_id}', [EventController::class, 'showEvent'])->name('event_show');
+    Route::get('/event/edit/{event_id}', [EventController::class, 'editEvent'])->name('edit_event');
+
+    //ATTENDEES/STUDENT
+    Route::get('/admin/manage/attendees', [AttendeesController::class, 'attendees'])->name('manage_attendees');
+    Route::post('/admin/manage/attendees/create', [AttendeesController::class, 'createAttendees'])->name('create_attendees');
+    Route::get('/atendees/rollno', [AttendeesController::class, 'displayRollNo'])->name('attendees_rollno');
 });
 
 

@@ -87,9 +87,9 @@
                             
                             <td>
                                 <!-- Edit Button -->
-                                <a href="#" data-bs-toggle="modal" data-bs-target="#editOfficerModal{{$user->id}}" style="background-color: transparent; border: none;">
+                                <button href="#" data-bs-toggle="modal" data-bs-target="#editOfficerModal{{$user->id}}" style="background-color: transparent; border: none;">
                                     <i class="bi bi-pencil-fill" style="color: #550000;"></i>
-                                </a>
+                                </button>
                     
                                 <!-- View Profile Button -->
                                 <button type="button" class="view-officer" data-id="{{$user->id}}" style="background-color: transparent; border: none;">
@@ -118,7 +118,7 @@
         
     </section>
 
-    {{-- manage officer modals --}}
+{{-- manage officer modals --}}
 @include('admin.pages.officer.officer-modals.add-officer-modal') 
 @include('admin.pages.officer.officer-modals.edit-officers')
 

@@ -33,11 +33,11 @@
         @endif
 
         <div id="officerListSection">
-            <div class="d-flex justify-content-end align-items-center mb-3">
+            <div class="d-flex justify-content-between align-items-center mb-3">
                 <!-- New Officer Button -->
-                {{-- <button class="btn btn-new-officer" data-bs-toggle="modal" data-bs-target="#addOfficerModal">
-                    + New Officer
-                </button> --}}
+                <button class="btn btn-new-officer" data-bs-toggle="modal" data-bs-target="#addOfficerModal">
+                    + New Admin
+                </button>
 
             
                 <div class="search-container">

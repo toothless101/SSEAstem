@@ -80,7 +80,7 @@
 
         <!-- Attendees -->
         <li>
-            <a href="" class="">
+            <a href="{{route('manage_attendees')}}" class="{{request()->routeIs('manage_attendees') ? 'active' : ''}}">
                 <i class="fa-solid fa-users"></i>
                 <span class="link_name">Attendees</span>
             </a>

@@ -32,7 +32,6 @@
                   </div> 
                   
                   <h5 id="wlcm_mssge_card" class="wlcm_mssge_card">Welcome back!</h5>
-
                 </div>
                  
               </div>

@@ -1,13 +1,13 @@
-<div class="modal fade" id="addEventModal" tabindex="-1" aria-labelledby="addEventModalLabel" aria-hidden="true">
+@foreach ($events as $event)
+<div class="modal fade" id="editEventModal{{$event->id}}" tabindex="-1" aria-labelledby="editEventModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="addEventModalLabel">Create Event</h5>
+                <h5 class="modal-title" id="editEventModalLabel">Edit Event</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-
-                <form id="addEvent" action="{{route('create_event') }}" method="POST" enctype="multipart/form-data">
+                <form id="addEvent" action="" method="" enctype="multipart/form-data">
                     @csrf
 
                     <!-- Success and Error Messages -->
@@ -24,8 +24,8 @@
                     <div class="row">
                         <!-- Event Name -->
                         <div class="form-group col-md-6">
-                            <label for="eventName" class="form-label">Event Name</label>
-                            <input type="text" id="eventName" name="event_name" class="form-control" value="{{old('event_name')}}">
+                            <label for="eventName{{$event->id}}" class="form-label">Event Name</label>
+                            <input type="text" id="eventName{{$event->id}}" name="event_name" class="form-control" value="{{$event->event_name}}">
                             
                             @error('event_name')
                             <div class="text-danger">{{ $message }}</div>
@@ -34,8 +34,8 @@
 
                         <!-- Event Place -->
                         <div class="form-group col-md-6 mb-3">
-                            <label for="eventPlace" class="form-label">Event Venue</label>
-                            <input type="text" id="eventPlace" name="event_venue" class="form-control" value="{{old('event_venue')}}">
+                            <label for="event_venue{{$event->id}}" class="form-label">Event Venue</label>
+                            <input type="text" id="event_venue{{$event->id}}" name="event_venue" class="form-control" value="{{$event->event_venue}}">
                            
                             @error('event_venue')
                             <div class="text-danger">{{ $message }}</div>
@@ -44,12 +44,12 @@
 
                         <!-- Event Type -->
                         <div class="form-group col-md-6 mb-3">
-                        <label for="eventType" class="form-label">Event Type</label>
-                           <select id="eventType" name="event_type" class="form-select" required>
+                        <label for="eventType{{$event->id}}" class="form-label">Event Type</label>
+                           <select id="eventType{{$event->id}}" name="event_type" class="form-select" required>
                                 <option value="" disabled selected>Select an Event Type</option>
-                                <option value="1" {{old('event_type') == 1 ? 'selected' : ''}}>Wholeday</option>
-                                <option value="2" {{old('event_type') == 2 ? 'selected' : ''}}>Half-Day Morning</option>
-                                <option value="3" {{old('event_type') == 3 ? 'selected' : ''}}>Half-Day Afternoon</option>
+                                <option value="1" {{$event->event_type == 1 ? 'selected' : ''}}>Wholeday</option>
+                                <option value="2" {{$event->event_type == 2 ? 'selected' : ''}}>Half-Day Morning</option>
+                                <option value="3" {{$event->event_type == 3 ? 'selected' : ''}}>Half-Day Afternoon</option>
                             </select>
                         
                             @error('event_type')
@@ -58,14 +58,14 @@
                         </div>
 
                         <div class="form-group col-md-6 mb-3">
-                            <label for="dateofEvent" class="form-label" id="eventDate">Event Date</label>
+                            <label for="dateofEvent{{$event->id}}" class="form-label" id="eventDate">Event Date</label>
                             <div class="input-group">
                                 <!-- Hidden fields for start and end date -->
-                                <input type="hidden" id="event_start_date" name="event_start_date" class="form-control" value="{{ old('event_start_date') }}">
-                                <input type="hidden" id="event_end_date" name="event_end_date" class="form-control" value="{{ old('event_end_date') }}">
+                                <input type="hidden" id="event_start_date{{$event->id}}" name="event_start_date" class="form-control" value="{{ $event->event_start_date}}">
+                                <input type="hidden" id="event_end_date{{$event->id}}" name="event_end_date" class="form-control" value="{{ $event->event_end_date}}">
 
                                 <!-- Date Range Picker Input -->
-                                <input id="daterange" name="daterange" class="form-control" value="{{ old('daterange') }}">
+                                <input id="daterange{{$event->id}}" name="daterange" class="form-control" value="{{$event->startDate}} - {{$event->endDate}}">
                             </div>
                             
                             @error('event_start_date')
@@ -83,16 +83,15 @@
                     <div class="container mb-4">
                         <div class="row">
                             <!-- Morning Schedule -->
-                            <div class="col-md-6 schedule-section" id="morningSchedule" style="display:none;">
+                            <div class="col-md-6 schedule-section" id="morningSchedule{{ $event->id }}" style="display:none;">
                                 <div class="div-title">Morning Schedule</div>
                                 <div class="row mt-2">
                                     <div class="col-md-6">
-                                        <label class="form-label">Start Time</label>
-                                        <input type="time" name="event_starttime_am" class="form-control">
-                                    </div>
+                                        <label class="form-label" for="event_starttime_am{{ $event->id }}">Start Time</label>
+                                        <input type="time" name="event_starttime_am" class="form-control" value="{{ $event->event_starttime_am ? \Carbon\Carbon::parse($event->event_starttime_am)->format('H:i') : '' }}">                                    </div>
                                     <div class="col-md-6">
-                                        <label class="form-label">End Time</label>
-                                        <input type="time" name="event_endtime_am" class="form-control">
+                                        <label class="form-label" for="event_endtime_am{{$event->id}}">End Time</label>
+                                        <input type="time" name="event_endtime_am" class="form-control" value="{{$event->event_endtime_am ? \Carbon\Carbon::parse($event->event_endtime_am)->format('H:i') : ''}}">
                                     </div>
                                 </div>
                                 <div class="row">
@@ -100,70 +99,77 @@
                                         <h6 class="checkInLabel">Attendance Time In</h6>
                                         <div class="startEndLabel">Start Time</div>
                                         <div class="input-group">
-                                            <input type="time" id="morning-checkin" name="morning_in_start" class="form-control" value="">
+                                            <input type="time" id="morning_in_start{{ $event->id }}" name="morning_in_start" class="form-control" value="{{$event->morning_in_start ? \Carbon\Carbon::parse($event->morning_in_start)->format('H:i') : ''}}">
                                         </div>
                                         <div class="startEndLabel">End Time</div>
                                         <div class="input-group">
-                                            <input type="time" id="morning-checkin-end" name="morning_in_end" class="form-control" value="">
+                                            <input type="time" id="morning_in_end{{ $event->id }}" name="morning_in_end" class="form-control" value="{{$event->morning_in_end ? \Carbon\Carbon::parse($event->morning_in_end)->format('H:i') : ''}}">
                                         </div>
                                     </div>
                                     <div class="col-6">
                                         <h6 class="checkInLabel">Attendance Time Out</h6>
                                         <div class="startEndLabel">Start Time</div>
                                         <div class="input-group">
-                                            <input type="time" id="morning-checkout" name="morning_out_start" class="form-control" value="">
+                                            <input type="time" id="morning_out_start{{ $event->id }}" name="morning_out_start" class="form-control" value="{{$event->morning_out_start ? \Carbon\Carbon::parse($event->morning_out_start)->format('H:i') : ''}}">
                                         </div>
                                         <div class="startEndLabel">End Time</div>
                                         <div class="input-group">
-                                            <input type="time" id="morning-checkout-end" name="morning_out_end" class="form-control" value="">
+                                            <input type="time" id="morning_out_end{{ $event->id }}" name="morning_out_end" class="form-control" value="{{$event->morning_out_end ? \Carbon\Carbon::parse($event->morning_out_end)->format('H:i') : ''}}">
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <!-- Afternoon Schedule -->
-                            <div class="col-md-6 schedule-section" id="afternoonSchedule" style="display:none;">
+                            <div class="col-md-6 schedule-section" id="afternoonSchedule{{ $event->id }}" style="display:none;">
                                 <div class="div-title">Afternoon Schedule</div>
                                 <div class="row mt-2">
                                     <div class="col-md-6">
                                         <label class="form-label">Start Time</label>
-                                        <input type="time" name="event_starttime_pm" class="form-control">
+                                        <input type="time" id="event_starttime_pm{{$event->id}}" name="event_starttime_pm" class="form-control" value="{{$event->event_starttime_pm ? \Carbon\Carbon::parse($event->event_starttime_pm)->format('H:i') : ''}}">
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label">End Time</label>
-                                        <input type="time" name="event_endtime_pm" class="form-control">
+                                        <input type="time" id="event_endtime_pm{{$event->id}}" name="event_endtime_pm" class="form-control" value="{{$event->event_endtime_pm ? \Carbon\Carbon::parse($event->event_endtime_pm)->format('H:i') : ''}}">
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-6">
-                                        <h6 class="checkInLabel">Attendance Time In </h6>
+                                        <h6 class="checkInLabel">Attendance Time In</h6>
                                         <div class="startEndLabel">Start Time</div>
                                         <div class="input-group">
-                                            <input type="time" id="afternoon-checkin-start" name="afternoon_in_start" class="form-control" value="">
+                                            <input type="time" id="afternoon_in_start{{ $event->id }}" name="afternoon_in_start" class="form-control" value="{{$event->afternoon_in_start ? \Carbon\Carbon::parse($event->afternoon_in_start)->format('H:i') : ''}}">
                                         </div>
                                         <div class="startEndLabel">End Time</div>
                                         <div class="input-group">
-                                            <input type="time" id="afternoon-checkin-end" name="afternoon_in_end" class="form-control" value="">
+                                            <input type="time" id="afternoon_out_end{{ $event->id }}" name="afternoon_in_end" class="form-control" value="{{$event->afternoon_in_end ? \Carbon\Carbon::parse($event->afternoon_in_end)->format('H:i') : ''}}">
                                         </div>
                                     </div>
                                     <div class="col-6">
                                         <h6 class="checkInLabel">Attendance Time Out</h6>
                                         <div class="startEndLabel">Start Time</div>
                                         <div class="input-group">
-                                            <input type="time" id="afternoon-checkout-start" name="afternoon_out_start" class="form-control" value="">
+                                            <input type="time" id="afternoon_out_start{{ $event->id }}" name="afternoon_out_start" class="form-control" value="{{$event->afternoon_out_start ? \Carbon\Carbon::parse($event->afternoon_out_start)->format('H:i') : ''}}">
                                         </div>
                                         <div class="startEndLabel">End Time</div>
                                         <div class="input-group">
-                                            <input type="time" id="afternoon-checkout-end" name="afternoon_out_end" class="form-control" value="">
+                                            <input type="time" id="afternoon_out_end{{ $event->id }}" name="afternoon_out_end" class="form-control" value="{{$event->afternoon_out_end ? \Carbon\Carbon::parse($event->afternoon_out_end)->format('H:i') : ''}}">
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
+                    
                     <div id="assignedOfficersList" class="mt-3">
                         <h6>Assigned Officers:</h6>
-                        <ul id="officerNameList"></ul>
+                        <ul id="officerNameList">
+                            @foreach ($event->users()->wherePivot('assignment_type', '!=', 'unassigned')->get() as $officer)
+                                <li id="officer{{$officer->id}}">
+                                    {{ $officer->firstname }} {{ $officer->lastname }} - {{ $officer->pivot->assignment_type }}
+                                    {{-- <button type="button" class="btn-close" aria-label="Close" onclick="removeOfficer({{ $officer->id }})"></button> --}}
+                                </li>
+                            @endforeach
+                        </ul>
                     </div>
 
                     <!-- Hidden input to send assigned officer IDs -->
@@ -171,23 +177,22 @@
 
                     <!-- Assign Officer Button -->
                     <div class="assign_event_officer mb-5 d-flex justify-content-end">
-                        <button type="button" class="btn btn-primary" id="assignOfficerBtn" data-bs-toggle="modal" data-bs-target="#assignOfficerModal">Assign Officer</button>
+                        <button type="button" class="btn btn-primary" id="assignOfficerBtn" data-bs-toggle="modal" data-bs-target="#assignOfficerModal">Edit Officer</button>
                     </div>
 
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-cancel" data-bs-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-submit">Create Event</button>
+                        <button type="submit" class="btn btn-submit">Update Event</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 </div>
+@endforeach
 
-@include('admin.pages.event.event-modals.assign-officer')
-
-<div class="modal fade" id="successAddEventModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+<div class="modal fade" id="successUpdateEventModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" style="width: 500px;">
         <div class="modal-content text-center p-4">
             <div class="modal-body">
@@ -197,7 +202,7 @@
                     </div>
                 </div>
                 <h3 class="fw-bold text-uppercase text-success">Success</h3>
-                <p class="mt-2">Event Created Successfully</p>
+                <p class="mt-2">Event Updated Successfully</p>
                 <button type="button" class="btn btn-cancel" data-bs-dismiss="modal">OK</button>
             </div>
         </div>
@@ -205,7 +210,7 @@
   </div>
   
   {{-- Error Modal --}}
-  <div class="modal fade" id="errorAddEventModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
+  <div class="modal fade" id="errorUpdateEventModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" style="width: 500px;">
           <div class="modal-content text-center p-4">
               <div class="modal-body">
@@ -215,7 +220,7 @@
                       </div>
                   </div>
                   <h3 class="fw-bold text-uppercase text-success">Error!</h3>
-                  <p class="mt-2">Error Creating Event {{session('error')}}</p>
+                  <p class="mt-2">Error Updating Event {{session('error')}}</p>
                   <button type="button" class="btn btn-cancel" data-bs-dismiss="modal">OK</button>
               </div>
           </div>
@@ -224,30 +229,54 @@
 
 
 <script>
-  
-    $(document).ready(function() {
-        // Initialize the date range picker
-        $('#daterange').daterangepicker({
-        startDate: moment().startOf('day'),  // Default start date
-        endDate: moment().endOf('day'),      // Default end date
-        locale: {
-            format: 'MMMM D, YYYY'  // Date format
-        }
-    }, function(start, end, label) {
-        // Update the hidden fields with the selected start and end dates
-        $('#event_start_date').val(start.format('YYYY-MM-DD'));  // Set start date
-        $('#event_end_date').val(end.format('YYYY-MM-DD'));      // Set end date
 
-        // Update the daterange input field to reflect the selected range
-        if (start.isSame(end)) {
-            // If it's the same day, only one date is selected
-            $('#daterange').val(start.format('YYYY-MM-DD'));  // Single date selected
-        } else {
-            // If it's a range, show the range
-            $('#daterange').val(start.format('YYYY-MM-DD') + ' - ' + end.format('YYYY-MM-DD'));  // Date range
-        }
+    $(document).ready(function() {
+    // Initialize Date Range Picker for each event modal
+    @foreach ($events as $event)
+        $('#daterange{{$event->id}}').daterangepicker({
+            startDate: moment('{{$event->event_start_date}}'),
+            endDate: moment('{{$event->event_end_date}}'),
+            locale: { format: 'YYYY-MM-DD' }
+        }, function(start, end) {
+            $('#event_start_date{{$event->id}}').val(start.format('YYYY-MM-DD'));
+            $('#event_end_date{{$event->id}}').val(end.format('YYYY-MM-DD'));
         });
+    @endforeach
+
+    // Event Listener for Dynamic Modals
+    $(document).on('shown.bs.modal', function (e) {
+        var modal = $(e.target);
+        var eventId = modal.attr('id').replace('editEventModal', '');
+
+        // Check and initialize daterangepicker if needed
+        if (!$('#daterange' + eventId).data('daterangepicker')) {
+            $('#daterange' + eventId).daterangepicker({
+                locale: { format: 'YYYY-MM-DD' }
+            }, function(start, end) {
+                $('#event_start_date' + eventId).val(start.format('YYYY-MM-DD'));
+                $('#event_end_date' + eventId).val(end.format('YYYY-MM-DD'));
+            });
+        }
+
+        // Toggle Schedule Based on Event Type
+        $('#eventType' + eventId).change(function () {
+            var eventType = $(this).val();
+            if (eventType == 1) {
+                $('#morningSchedule' + eventId).show();
+                $('#afternoonSchedule' + eventId).show();
+            } else if (eventType == 2) {
+                $('#morningSchedule' + eventId).show();
+                $('#afternoonSchedule' + eventId).hide();
+            } else if (eventType == 3) {
+                $('#morningSchedule' + eventId).hide();
+                $('#afternoonSchedule' + eventId).show();
+            }else{
+                $('#morningSchedule' + eventId + ', #afternoonSchedule' + eventId).hide();
+            }
+        }).trigger('change');
     });
+});
+
 
     //SUCCESS/ERROR MODALS
     @if(session('success_add_event'))
@@ -263,7 +292,4 @@
             errorModal.show();
         });
     @endif
-
-  
-
 </script>
