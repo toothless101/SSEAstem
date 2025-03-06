@@ -97,7 +97,7 @@
 
         <!-- Attendance -->
         <li>
-            <a href="" class="">
+            <a href="{{route('manage_attendance')}}" class="{{request()->routeIs('manage_attendance') ? 'active' : ''}}">
                 <i class="fa-solid fa-clipboard-list"></i>
                 <span class="link_name">Attendance</span>
             </a>

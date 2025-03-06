@@ -173,7 +173,12 @@
    updateAssignDropdowns();
 });
 
-   
+    //Remove the rmaining modal backdrop after closing any modal
+    document.addEventListener('hidden.bs.modal', function(){
+        setTimeout(()=>{
+            document.querySelectorAll('.modal-backdrop').forEach(backdrop => backdrop.remove());
+        }, 300); //small delat to ensure the bootstrap close first
+    });
 
 
 

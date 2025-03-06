@@ -26,6 +26,7 @@ class Event extends Model
         'afternoon_out_start',
         'afternoon_out_end',
         // 'user_id'
+        'schoolyear_id'
     ];
 
 
@@ -55,5 +56,14 @@ class Event extends Model
 
     protected $dates = ['eventdate'];
     
-    
+    //attendance and event relationship
+    public function attendances()
+    {
+        return $this->hasMany(Attendance::class);
+    }
+
+    public function schoolyear()
+    {
+        return $this->belongsTo(SchoolYear::class, 'schoolyear_id');
+    }
 }

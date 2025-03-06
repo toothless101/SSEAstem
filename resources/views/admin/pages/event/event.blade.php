@@ -59,7 +59,7 @@
                             </small>
                             <small><br>Start Time: <strong> {{ $event->start_time }}</strong></small>
                             <small></br>End Time:  <strong> {{ $event->end_time }}</strong></small>
-                            <small><br>Date: <strong> {{$event->startDate}} to {{$event->endDate}}</strong></small>
+                            <small><br>Date: <strong> {{ \Carbon\Carbon::parse($event->event_start_date)->format('F d, Y') }} to {{ \Carbon\Carbon::parse($event->event_end_date)->format('F d, Y') }}</strong></small>
                             <small><br>S.Y.: <strong>2024-2025</strong></small>
                         </td>
                         <td> 
@@ -70,7 +70,11 @@
                                 @endif
                             @endforeach
                         </td>
-                        <td>Pending</td>
+                        <td>
+                            <span class="badge {{$event->status == 'Ongoing' ? 'bg-success' : ($event->status == 'Upcoming' ? 'bg-primary' : 'bg-secondary') }}">
+                                {{$event->status}}
+                            </span>
+                        </td>
                         <td>
                             <button class="editeventBtn" style="background: transparent; border: none;" data-bs-toggle="modal" data-bs-target="#editEventModal{{$event->id}}">
                                 <i class="bi bi-pencil-fill" style="color: #550000;"></i>

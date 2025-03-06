@@ -20,10 +20,12 @@ return new class extends Migration
             $table->enum('gender', ['Male', 'Female']);
             $table->string('department');
             $table->string('program')->nullable();
+            $table->string('major')->nullable();
             $table->string('year_level')->nullable();
             $table->string('grade_level')->nullable();
             $table->string('section')->nullable(); //Section of the student
             $table->string('track')->nullable();
+            $table->string('strand')->nullable();
             $table->string('img')->nullable();
             $table->string('email_add')->unique();
             $table->string('address')->nullable();

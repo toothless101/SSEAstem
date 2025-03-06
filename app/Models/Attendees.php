@@ -11,7 +11,7 @@ class Attendees extends Model
     use HasFactory;
 
     protected $table = 'attendees';
-    
+
     protected $fillable = [
         'rollno', 
         'firstname', 
@@ -24,6 +24,8 @@ class Attendees extends Model
         'grade_level', 
         'section', 
         'track', 
+        'strand',
+        'major',
         'img', 
         'email_add', 
         'address', 
@@ -35,5 +37,11 @@ class Attendees extends Model
     public function schoolyear()   
     {
         return $this->belongsTo(SchoolYear::class);
+    }
+
+    //relationship of attendees and attendance
+    public function attendances()
+    {
+        return $this->hasMany(Attendance::class);
     }
 }

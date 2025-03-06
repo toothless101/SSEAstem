@@ -13,14 +13,8 @@ return new class extends Migration
     {
         Schema::table('events', function (Blueprint $table) {
             //
-            $table->dropForeign('user_id');
+            $table->foreignId('schoolyear_id')->nullable()->constrained('schoolyears')->onDelete('cascade');
         });
-        
-        Schema::table('events', function (Blueprint $table) {
-            //
-            $table->dropColumn('user_id');
-        });
-
     }
 
     /**
@@ -30,7 +24,8 @@ return new class extends Migration
     {
         Schema::table('events', function (Blueprint $table) {
             //
-            $table->foreignId('user_id')->constrained();
+            $table->dropForeign(['schoolyear_id']);
+            $table->dropColumn('schoolyear_id');
         });
     }
 };

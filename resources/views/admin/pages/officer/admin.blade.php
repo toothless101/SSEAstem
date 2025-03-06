@@ -35,7 +35,7 @@
         <div id="officerListSection">
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <!-- New Officer Button -->
-                <button class="btn btn-new-officer" data-bs-toggle="modal" data-bs-target="#addOfficerModal">
+                <button class="btn btn-new-officer" data-bs-toggle="modal" data-bs-target="#addAdminModal">
                     + New Admin
                 </button>
 
@@ -109,9 +109,9 @@
         
     </section>
 
-    {{-- manage officer modals
-@include('admin.pages.officer.officer-modals.add-officer-modal') --}}
-@include('admin.pages.officer.officer-modals.edit-officers') 
+    {{-- manage officer modals--}}
+@include('admin.pages.officer.admin-modals.add-admin') 
+
 
 
 

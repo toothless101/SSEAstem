@@ -10,6 +10,17 @@
             <div class="modal-body">
                 <form action="{{route('create_attendees')}}" method="POST" enctype="multipart/form-data">
                     @csrf
+                     <!-- Success and Error Messages -->
+                     @if (session('success'))
+                     <div class="alert alert-success">
+                         {{ session('success') }}
+                     </div>
+                    @endif
+                    @if (session('error'))
+                        <div class="alert alert-danger">
+                            {{ session('error') }}
+                        </div>
+                    @endif
                     <div class="row">
                         <!-- Left Side: Image Upload and Preview -->
                         <div class="col-md-6">
@@ -32,7 +43,7 @@
                             <div class="row g-3">
                                 <div class="col-md-6">
                                     <label for="rollno" class="form-label">Roll No.</label>
-                                    <input type="text" class="form-control" id="rollno" name="rollno" value="{{$newRollNo ?? ''}}" readonly>
+                                    <input type="text" class="form-control" id="rollno" name="rollno" value="{{$newRollNo ?? ''}}" disabled readonly>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="department" class="form-label">Department</label>
@@ -297,4 +308,22 @@
             errorModal.show();
         });
     @endif
+
+    $(document).ready(function(){
+      //call the generated roll number --
+      $.ajax({
+        url: "{{route('attendees_rollno')}}",
+        type: "GET",
+        success: function(response){
+          if(response.rollno){
+            $("#rollno").val(response.rollno);
+          }else{
+            alert("Failed to generate Roll Number");
+          }
+        },
+        error: function(){
+          alert("Error fetching Roll Number")
+        }
+      });
+    });
 </script>

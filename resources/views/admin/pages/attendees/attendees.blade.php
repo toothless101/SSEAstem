@@ -32,6 +32,7 @@
         <table id="student_dataTable">
             <thead>
                 <tr>
+                    <th>No.</th>
                     <th class="text-start">Roll No.</th>
                     <th>Name</th>
                     <th>Department</th>
@@ -42,26 +43,44 @@
             </thead>
 
             <tbody id="student_info">
-                <tr>
-                    <td>1</td>
-                    <td>Hilary Mae Poralan</td>
-                    <td>College</td>
-                    <td class="text-start">
-                        <small>Gr/Yr Level: </small>
-                        <small><br>Section:</small>
-                        <small></br>Program/Track:</small>
-                        <small><br>Major:</small>
-                        <small><br>S.Y.:</small>
-                    </td>
-                    <td></td>
-                    <td>
-                        <div class="action-btn">
-                            <a href="" class="" data-bs-toggle="modal" data-bs-target="#EditStudentAttendeesModal">
-                                <i class="bi bi-pencil-fill" style="color: #550000;"></i>
+                @foreach ($attendees as $key => $attendee )
+                    <tr>
+                        <td class="text-center">{{ ++$key}}</td>
+                        <td class="text-start">{{$attendee->rollno}}</td>
+                        <td class="text-start">{{$attendee->firstname}} {{$attendee->middlename}} {{$attendee->lastname}}</td>
+                        <td>{{$attendee->department}}</td>
+                        <td class="text-start">
+                            @if($attendee->department === 'Junior High School')
+                                <small>Grade Level: <span id="grade_level"><strong>{{$attendee->grade_level}}</strong></span></small>
+                                <small><br>Section: <span id="section"><strong>{{$attendee->section}}</strong></span></small>
+                            @elseif($attendee->department === 'Senior High School')
+                                <small>Grade Level: <span id="grade_level"><strong>{{$attendee->grade_level}}</strong></span></small>
+                                <small><br>Section: <span id="section"><strong>{{$attendee->section}}</strong></span></small>
+                                <small></br>Track: <span id="track"><strong>{{$attendee->track}}</strong></span></small>
+                                <small><br>Strand: <span id="strand"><strong>{{$attendee->strand}}</strong></span> </small>
+                            @elseif($attendee->department === 'College')
+                                <small>Program: <span id="program"><strong>{{$attendee->program}}</strong></span></small>
+                                <small><br>Major: <span id="major"><strong>{{$attendee->major}}</strong></span></small>
+                                <small><br>Year Level: <span id="year_level"><strong>{{$attendee->year_level}}</strong></span></small>
+                            @endif
+                                <small><br>S.Y.: <span><strong>{{$attendee->schoolyear->schoolyear}}</strong></span></small>
+                            </td>
+                        <td>
+                            <a href="#" class="open-qr-modal" data-rollno="{{$attendee->rollno}}">
+                                <i class="fa-solid fa-qrcode" style="color: #550000"></i>
                             </a>
-                        </div>
-                    </td>
-                </tr>
+                        </td>
+                        <td>
+                            <button type="button" class="" data-bs-toggle="modal" data-bs-target="#EditStudentAttendeesModal" style="background-color: transparent; border: none;">
+                                <i class="bi bi-pencil-fill" style="color: #550000;"></i>
+                            </button>
+                    
+                            <button type="button" class="view-officer" data-id="" style="background-color: transparent; border: none;">
+                                <i class="bi bi-eye-fill" style="color: #550000; margin-left: 5px;"></i>
+                            </button>
+                        </td>
+                    </tr>
+                @endforeach
             </tbody>
         </table>
     </div>
@@ -69,6 +88,7 @@
 
 @include('admin.pages.attendees.attendees-modals.add-student-attendees')
 @include('admin.pages.attendees.attendees-modals.edit-student-modal')
+@include('admin.pages.attendees.attendees-modals.qrcode')
 
 <script>
     $(document).ready(function(){

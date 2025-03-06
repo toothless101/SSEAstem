@@ -228,11 +228,12 @@
     $(document).ready(function() {
         // Initialize the date range picker
         $('#daterange').daterangepicker({
-        startDate: moment().startOf('day'),  // Default start date
-        endDate: moment().endOf('day'),      // Default end date
-        locale: {
-            format: 'MMMM D, YYYY'  // Date format
-        }
+            startDate: moment().startOf('day'),  // Default start date
+            endDate: moment().endOf('day'),      // Default end date
+            minDate: moment(),  // Pwede ang karon nga date
+            locale: {
+                format: 'MMMM D, YYYY'  // Date format
+            }
     }, function(start, end, label) {
         // Update the hidden fields with the selected start and end dates
         $('#event_start_date').val(start.format('YYYY-MM-DD'));  // Set start date

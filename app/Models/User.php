@@ -25,7 +25,7 @@ class User extends Authenticatable
         'username',
         'password',
         'usertype',
-        'user_img'
+        'user_img',
     ];
 
     /**
@@ -59,7 +59,17 @@ class User extends Authenticatable
     }
 
     public function schoolyears(){
-        return $this->belongsToMany(SchoolYear::class, 'user_schoolyear')
+        return $this->belongsToMany(SchoolYear::class, 'user_schoolyear', 'schoolyear_id', 'user_id')
         ->withTimestamps();
+    }
+
+    //USER AN SCHOOLYEAR RELATIONSHIP
+    public function userSchoolyears(){
+        return $this->hasMany(UserSchoolyear::class, 'user_id', 'id');
+    }
+
+    //attendance and user relationship
+    public function attendances(){
+        return $this->hasMany(Attendance::class);
     }
 }

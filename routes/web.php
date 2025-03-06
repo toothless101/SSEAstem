@@ -1,9 +1,12 @@
 <?php
 
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\AttendeesController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\OfficerController;
+use App\Http\Controllers\QRCodeController;
 use App\Http\Controllers\SchoolYearController;
 use App\Http\Middleware\AdminAuth;
 use Illuminate\Support\Facades\Route;
@@ -40,7 +43,10 @@ Route::middleware(['auth', 'admin'])->group(function(){
     Route::put('/officer/update/{user}', [OfficerController::class, 'updateOfficer'])->name('update_officer');
     Route::delete('/officer/delete/{user}', [OfficerController::class, 'deleteOfficer'])->name('delete_officer');
     Route::get('/officer/profile/{user}', [OfficerController::class, 'officerProfile'])->name('officer_profile');
-    Route::get('/admin/manage/admin', [AuthController::class, 'adminPage'])->name('admin_page');
+
+    //AdminController
+    Route::get('/admin/manage/admin', [AdminController::class, 'adminPage'])->name('admin_page');
+    Route::post('admin/manage/admin/create', [AdminController::class, 'createAdmin'])->name('create_admin');
 
     //Event Management
     Route::get('/admin/manage/event', [EventController::class, 'event'])->name('manage_event');
@@ -52,14 +58,19 @@ Route::middleware(['auth', 'admin'])->group(function(){
     Route::get('/admin/manage/attendees', [AttendeesController::class, 'attendees'])->name('manage_attendees');
     Route::post('/admin/manage/attendees/create', [AttendeesController::class, 'createAttendees'])->name('create_attendees');
     Route::get('/atendees/rollno', [AttendeesController::class, 'displayRollNo'])->name('attendees_rollno');
+    Route::get('/generate-qrcode/{rollno}', [QRCodeController::class, 'generateQrCode'])->name('generateQrCode');
+
+    //ATTENDANCE
+    Route::get('/admin/manage/attendance', [AttendanceController::class, 'attendance'])->name('manage_attendance');
+    Route::post('/admin/attendance/store', [AttendanceController::class, 'storeAttendance'])->name('get_attendance');
 });
 
 
-// //Student Officer Side
-// Route::get('/login', [AuthController::class, 'studentAuthForm'])->name('login');
-// Route::post('/student-officer/login', [AuthController::class, 'studentOfficerLogin'])->name('student_officer_login');
-// Route::get('/student-officer/logout', [AuthController::class, 'studentOfficerLogout'])->name('student_officer_logout');
-// //Student Officer Middleware
-// Route::middleware(['auth', 'student_officer'])->group(function(){
-//     Route::get('/student-officer/dashboard', [AuthController::class, 'student_officer_dashboard'])->name('student_officer_dashboard');
-// });
+//Student Officer Side
+Route::get('/login', [AuthController::class, 'studentAuthForm'])->name('login');
+Route::post('/student-officer/login', [AuthController::class, 'studentOfficerLogin'])->name('student_officer_login');
+Route::get('/student-officer/logout', [AuthController::class, 'studentOfficerLogout'])->name('student_officer_logout');
+//Student Officer Middleware
+Route::middleware(['auth', 'student_officer'])->group(function(){
+    Route::get('/student-officer/dashboard', [AuthController::class, 'student_officer_dashboard'])->name('student_officer_dashboard');
+});

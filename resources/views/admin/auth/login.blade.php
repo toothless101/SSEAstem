@@ -75,8 +75,8 @@
 
         </form>
 
-        {{-- <!-- Signup Prompt -->
-        <div class="signup_btn">
+        <!-- Signup Prompt -->
+        {{-- <div class="signup_btn">
             Don't have an account? 
             <a href="{{route('admin_register')}}">Sign Up</a>
         </div> --}}

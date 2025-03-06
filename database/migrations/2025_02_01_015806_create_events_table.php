@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('event_name');
             $table->tinyInteger('event_type');
             $table->string('event_venue');    
-                
+            
             //attendance time (morning and afternoon)
             $table->time('morning_in_start')->nullable();
             $table->time('morning_in_end')->nullable();
@@ -27,9 +27,7 @@ return new class extends Migration
             $table->time('afternoon_out_start')->nullable();
             $table->time('afternoon_out_end')->nullable();
 
-            //foreign key to users/officers
-            // $table->unsignedBigInteger('user_id');
-            // $table->foreign('user_id')->references('id')->on('users');
+           
             $table->timestamps();
         });
     }

@@ -11,7 +11,15 @@ class AttendeesController extends Controller
     //
     public function attendees()
     {
-        return view('admin.pages.attendees.attendees');
+        $activeSchoolYear = SchoolYear::where('is_active', true)->first();
+
+        if(!$activeSchoolYear){
+            return redirect()->back()->with('error', 'No Active School Year Found!');
+        }
+        //get attendeesb based on the active school year
+        $attendees = Attendees::where('schoolyear_id', $activeSchoolYear->id)->latest()->get();
+        
+        return view('admin.pages.attendees.attendees', compact('attendees', 'activeSchoolYear'));
     }
 
     public function createAttendees(Request $request)
@@ -87,7 +95,7 @@ class AttendeesController extends Controller
             ]); 
             return redirect()->back()->with('success_adding_student', 'Attendee created successfully!');
         }catch(\Exception $e){
-            return redirect()->route('manage_atttendees')->with('error_adding_student', 'Something went wrong, please try again!' . $e->getMessage());
+            return redirect()->route('manage_attendees')->with('error', 'Something went wrong, please try again!' . $e->getMessage());
         }
      
         
@@ -119,4 +127,5 @@ class AttendeesController extends Controller
 
         // return view('admin.pages.attendees.attendees-modals.add-student-attendees', compact('newRollNo', 'activeSchoolYear'));
     }
+
 }

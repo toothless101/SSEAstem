@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use App\Models\Event;
+use App\Models\SchoolYear;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -12,17 +13,26 @@ class EventController extends Controller
 {
     
     public function event(){
-        $events = Event::latest()->get();
+
+        $activeSchoolyear = SchoolYear::where('is_active', true)->first();
+
+        if (!$activeSchoolyear) {
+            return redirect()->back()->with('error', 'No active School Year found!');
+        }
+
+        // $events = Event::latest()->get();
+        $events = Event::where('schoolyear_id', $activeSchoolyear->id)->latest()->get();
         $officers = User::where('usertype', 2)->get();
+        $today = Carbon::today();
+        $currentTime = Carbon::now();
 
         // Iterate through each event to set start_time and end_time
     foreach ($events as $event) {
         // Set default values
         $start_time = 'N/A';
         $end_time = 'N/A';
-        $startDate = Carbon::parse($event->event_start_date)->format('F d, Y');
-        $endDate = Carbon::parse($event ->event_end_date )->format('F d, Y');
-
+        $startDate = Carbon::parse($event->event_start_date);
+        $endDate = Carbon::parse($event->event_end_date);
         // Check the event type and set the times accordingly
         if ($event->event_type == 1) { // Whole day
             $start_time = $event->event_starttime_am ? Carbon::parse($event->event_starttime_am)->format('h:i A') : 'N/A';
@@ -35,8 +45,29 @@ class EventController extends Controller
             $end_time = $event->event_endtime_pm ? Carbon::parse($event->event_endtime_pm)->format('h:i A') : 'N/A';
         }
 
-        
+         // Determine the status
+         if ($startDate->gt($today)) {
+            $status = 'Upcoming';
+        } elseif ($today->between($startDate, $endDate)) { 
+            // Check for whole-day events
+            if ($event->event_type == 1) {
+                $status = 'Ongoing';
+            } elseif ($event->event_type == 2 && $currentTime->lt($start_time)) {
+                $status = 'Upcoming';
+            } elseif ($event->event_type == 2 && $currentTime->between($start_time, $end_time)) {
+                $status = 'Ongoing';
+            } elseif ($event->event_type == 3 && $currentTime->lt($start_time)) {
+                $status = 'Upcoming';
+            } elseif ($event->event_type == 3 && $currentTime->between($start_time, $end_time)) {
+                $status = 'Ongoing';
+            } else {
+                $status = 'Done';
+            }
+        } else {
+            $status = 'Done';
+        }
         // Add start_time and end_time to the event
+        $event->status = $status;
         $event->start_time = $start_time;
         $event->end_time = $end_time;
         $event->startDate = $startDate;
@@ -70,12 +101,18 @@ class EventController extends Controller
             'afternoon_out_start' => 'nullable|date_format:H:i',
             'afternoon_out_end' => 'nullable|date_format:H:i',
             'assigned_officers' => 'nullable|string',
-    
+            
         ]);
 
         // if ($validator->fails()) {
         //     dd($validator->errors()); // This will dump validation errors and stop execution
         // }
+        
+        //find active 
+        $activeSchoolyear = SchoolYear::where('is_active', true)->first();
+        if(!$activeSchoolyear){
+            return redirect()->back()->with('error', 'No active Schoolyear Found!');
+        }
 
         try{
             //create the event
@@ -97,6 +134,7 @@ class EventController extends Controller
                 'afternoon_in_end' => $request->afternoon_in_end,
                 'afternoon_out_start' => $request->afternoon_out_start,
                 'afternoon_out_end' => $request->afternoon_out_end,
+                'schoolyear_id' => $activeSchoolyear->id
             ]);
            
             //save assigned officers
@@ -116,12 +154,22 @@ class EventController extends Controller
 
     public function showEvent($event_id){
         $event = Event::findOrFail($event_id);
+        $activeSchoolyear = Schoolyear::where('is_active', true)->first();
+        if(!$activeSchoolyear){
+            return redirect()->back()->with('error', 'No active School Year found!');
+        }
 
         $officers = $event->users()->wherePivot('assignment_type', '!=', 'unassigned')->get();        //set default values
         $start_time = 'N/A';
         $end_time = 'N/A';
-        $startDate = Carbon::parse($event->event_start_date)->format('F d, Y');
-        $endDate = Carbon::parse($event ->event_end_date )->format('F d, Y');
+       
+        // Convert start and end dates
+        $startDate = Carbon::parse($event->event_start_date);
+        $endDate = Carbon::parse($event->event_end_date);
+        
+        // Get the current date and time
+        $today = Carbon::today();
+        $currentTime = Carbon::now();
 
         //chec the event type and display correct start time and event end time
         if($event->event_type == 1) //Wholeday
@@ -138,11 +186,32 @@ class EventController extends Controller
             $end_time = $event->event_endtime_pm? Carbon::parse($event->event_endtime_pm)->format('h:i A') : 'N/A';
         }
 
+         // Compute event status
+        if ($startDate->gt($today)) {
+            $status = 'Upcoming';
+        } elseif ($today->between($startDate, $endDate)) { 
+            if ($event->event_type == 1) {
+                $status = 'Ongoing';
+            } elseif ($event->event_type == 2 && $currentTime->lt($start_time)) {
+                $status = 'Upcoming';
+            } elseif ($event->event_type == 2 && $currentTime->between($start_time, $end_time)) {
+                $status = 'Ongoing';
+            } elseif ($event->event_type == 3 && $currentTime->lt($start_time)) {
+                $status = 'Upcoming';
+            } elseif ($event->event_type == 3 && $currentTime->between($start_time, $end_time)) {
+                $status = 'Ongoing';
+            } else {
+                $status = 'Done';
+            }
+        } else {
+            $status = 'Done';
+        }
+
         return view('admin.pages.event.event', compact('event','start_time','end_time','startDate','endDate', 'officers'));
     }
 
     public function editEvent(Request $request, $event_id){
-        $event = Event::find($event_id);
+        $event = Event::findOrFail($event_id);
 
         return view('admin.pages.event.event-modals.edit-event-modal', compact('event'));
     }

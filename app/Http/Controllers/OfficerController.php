@@ -4,8 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\SchoolYear;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
+
+
 class OfficerController extends Controller
 {
     //
@@ -14,25 +18,42 @@ class OfficerController extends Controller
     //officer
     public function officer()
     {
-         $users = User::where('usertype', 2)->latest()->get();
+        $activeSchoolyear = SchoolYear::where('is_active', true)->first();
+
+        if(!$activeSchoolyear){
+            return redirect()->back()->with('error', 'No School Year Found!');
+        }
+
+        //get officers based on the active schoolyear
+         $users = User::where('usertype', 2)
+         ->whereHas('userSchoolyears', function($query) use ($activeSchoolyear){
+            $query->where('schoolyear_id', $activeSchoolyear->id);
+         })->latest()->get();
+
         return view('admin/pages/officer.officer', compact('users'));
     }
 
     //ADD OFFICER
     public function createOfficer(Request $request)
     {
-        
+
         $request->validate([
             'firstname' => 'required|string|max:255',
             'lastname' => 'required|string|max:255',
             'email' => 'required|unique:users,email|email',
             'username' => 'required|string|unique:users,username|max:255',
-            'usertype' => 'required|integer|in:1,2',
+            // 'usertype' => 'required|integer|in:1,2',
             'org_type' => 'required|integer|in:1,2',
             'user_img'=>'nullable|image|max:2048'
 
         ]);
 
+        //get active schoolyear
+        $activeSchoolyear = SchoolYear::where('is_active', true)->first();
+        if(!$activeSchoolyear){
+            return redirect()->back()->with('error', 'No Active School Year Found!');
+        }
+        //handle image upload
         $filename = 'default.png'; //default image if there is no image upldoaded
         if($request->hasFile('user_img')){
             $filename = time().'.'.$request->user_img->extension();
@@ -40,17 +61,38 @@ class OfficerController extends Controller
         }
 
         try {
+            $officerUsertype = '2';
             $defaultPassword = bcrypt('1');
-            User::create([
+            $user = User::create([
                 'firstname' => $request->firstname,
                 'lastname' => $request->lastname,
                 'email' => $request->email,
                 'username' => $request->username,
                 'password' => $defaultPassword,
-                'usertype' => $request->usertype,
+                'usertype' => $officerUsertype,
                 'org_type' => $request->org_type,
                 'user_img' => $filename
-            ]);
+            ]);                         
+                   
+            if (!$user) {
+                return redirect()->back()->with('error', 'User creation failed!');
+            }
+    
+            // Check if user is already assigned to the school year
+            $exists = DB::table('user_schoolyear')
+                ->where('user_id', $user->id)
+                ->where('schoolyear_id', $activeSchoolyear->id)
+                ->exists();
+    
+            if (!$exists) {
+                // Attach user to schoolyear
+                DB::table('user_schoolyear')->insert([
+                    'user_id' => $user->id,
+                    'schoolyear_id' => $activeSchoolyear->id,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
+            }
 
             return redirect()->back()->with('success_add', 'Officer created successfully!');
         }catch(\Exception $e){
